@@ -9,9 +9,15 @@ interface MainLayoutProps {
 
 export function MainLayout({ children }: MainLayoutProps) {
   return (
-    <Box minH="100vh">
+    <Box minH="100vh" w="100vw" bg="gray.900" position="relative">
       <Sidebar />
-      <Box ml="280px" p={8} bg="white" _dark={{ bg: "gray.900" }} minH="100vh">
+      <Box 
+        ml="280px" 
+        p={8} 
+        minH="100vh"
+        w="calc(100vw - 280px)"
+        bg="gray.900"
+      >
         {children}
       </Box>
     </Box>
