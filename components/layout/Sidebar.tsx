@@ -5,6 +5,7 @@ import { FiHome, FiFileText } from "react-icons/fi"
 import NextLink from "next/link"
 import { Logo } from "./Logo"
 import { ColorModeButton } from "@/components/ui/color-mode"
+import { AnimatedNavItem } from "./AnimatedNavItem"
 
 export function Sidebar() {
   return (
@@ -38,49 +39,13 @@ export function Sidebar() {
           </Text>
           
           <VStack align="start" gap={2} w="full">
-            <Link
-              as={NextLink}
-              href="/"
-              display="flex"
-              alignItems="center"
-              gap={3}
-              px={4}
-              py={3}
-              rounded="md"
-              w="full"
-              color="gray.300"
-              _hover={{
-                bg: "gray.800",
-                color: "white",
-                textDecoration: "none"
-              }}
-              transition="all 0.2s"
-            >
-              <Icon as={FiHome} />
-              <Text>Home</Text>
-            </Link>
+            <AnimatedNavItem href="/" icon={FiHome}>
+              Home
+            </AnimatedNavItem>
             
-            <Link
-              as={NextLink}
-              href="/blog"
-              display="flex"
-              alignItems="center"
-              gap={3}
-              px={4}
-              py={3}
-              rounded="md"
-              w="full"
-              color="gray.300"
-              _hover={{
-                bg: "gray.800",
-                color: "white",
-                textDecoration: "none"
-              }}
-              transition="all 0.2s"
-            >
-              <Icon as={FiFileText} />
-              <Text>Blog</Text>
-            </Link>
+            <AnimatedNavItem href="/blog" icon={FiFileText}>
+              Blog
+            </AnimatedNavItem>
           </VStack>
         </VStack>
         

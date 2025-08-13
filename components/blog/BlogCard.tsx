@@ -1,5 +1,3 @@
-"use client"
-
 import { Box, Heading, Text, HStack, Link } from "@chakra-ui/react"
 import NextLink from "next/link"
 
@@ -24,6 +22,8 @@ export function BlogCard({ post }: BlogCardProps) {
       href={`/blog/${post.slug}`}
       textDecoration="none"
       _hover={{ textDecoration: "none" }}
+      h="full"
+      display="flex"
     >
       <Box
         p={6}
