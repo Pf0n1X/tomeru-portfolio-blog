@@ -1,11 +1,10 @@
-"use client"
+"use client";
 
-import { Box, VStack, Text, Link, Icon } from "@chakra-ui/react"
-import { FiHome, FiFileText } from "react-icons/fi"
-import NextLink from "next/link"
-import { Logo } from "./Logo"
-import { ColorModeButton } from "@/components/ui/color-mode"
-import { AnimatedNavItem } from "./AnimatedNavItem"
+import { Box, VStack, Text } from "@chakra-ui/react";
+import { FiHome, FiFileText } from "react-icons/fi";
+import { Logo } from "./Logo";
+import { ColorModeButton } from "@/components/ui/color-mode";
+import { AnimatedNavItem } from "./AnimatedNavItem";
 
 export function Sidebar() {
   return (
@@ -55,5 +54,5 @@ export function Sidebar() {
         </Box>
       </VStack>
     </Box>
-  )
+  );
 }

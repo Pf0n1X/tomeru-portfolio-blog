@@ -1,28 +1,32 @@
-import { Box, Heading, Text, HStack, VStack } from "@chakra-ui/react"
-import { MainLayout } from "@/components/layout/MainLayout"
-import { getBlogPostBySlug, formatDate, getAllBlogSlugs } from "@/lib/mdx"
-import { notFound } from "next/navigation"
-import { MDXContent } from "@/components/blog/MDXContent"
+import { Box, Heading, Text, HStack, VStack } from "@chakra-ui/react";
+import { MainLayout } from "@/components/layout/MainLayout";
+import { getBlogPostBySlug, formatDate, getAllBlogSlugs } from "@/lib/mdx";
+import { notFound } from "next/navigation";
+import { MDXContent } from "@/components/blog/MDXContent";
+import type{ PageProps } from "@/.next/types/app/page";
 
-interface BlogPostPageProps {
-  params: {
-    slug: string
-  }
+interface BlogPostPageParams {
+  slug: string;
+}
+
+interface BlogPostPageProps extends PageProps {
+  params: Promise<BlogPostPageParams>;
 }
 
 // Generate static paths for all blog posts
 export function generateStaticParams() {
-  const slugs = getAllBlogSlugs()
+  const slugs = getAllBlogSlugs();
   return slugs.map((slug) => ({
     slug,
-  }))
+  }));
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getBlogPostBySlug(params.slug)
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
 
   if (!post || !post.published) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -37,7 +41,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             
             <HStack gap={4} mb={4}>
               <Text fontSize="sm" color="gray.500" _dark={{ color: "gray.400" }}>
-                By Tom Erusalimsky
+                By Tomer Erusalimsky
               </Text>
               <Text fontSize="sm" color="gray.500" _dark={{ color: "gray.400" }}>
                 {formatDate(post.date)} • {post.readTime}
@@ -70,5 +74,5 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </VStack>
       </Box>
     </MainLayout>
-  )
+  );
 }

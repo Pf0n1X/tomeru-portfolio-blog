@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { Box, Link } from "@chakra-ui/react"
-import NextLink from "next/link"
-import { useState } from "react"
+import { Box, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { useState } from "react";
 
 export function Logo() {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <Link as={NextLink} href="/" textDecoration="none" width="100%">
       <Box
         fontSize="2xl"
         fontWeight="bold"
+        overflow="visible"
         color="red.400"
         cursor="pointer"
          width="100%"
         position="relative"
         display="inline-block"
-        overflow="hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         transition="color 0.2s ease"
@@ -72,5 +72,5 @@ export function Logo() {
         </Box>
       </Box>
     </Link>
-  )
+  );
 }

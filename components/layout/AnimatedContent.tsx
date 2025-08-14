@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Box } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
+import { Box } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 interface AnimatedContentProps {
   children: React.ReactNode
@@ -10,20 +10,20 @@ interface AnimatedContentProps {
 }
 
 export function AnimatedContent({ children, delay = 0 }: AnimatedContentProps) {
-  const [isVisible, setIsVisible] = useState(false)
-  const pathname = usePathname()
+  const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     // Reset animation
-    setIsVisible(false)
+    setIsVisible(false);
     
-    // Start animation after delay + page transition time
+    // Start animation after delay + top navigation animation time
     const timer = setTimeout(() => {
-      setIsVisible(true)
-    }, 300 + delay) // 300ms fade out + delay
+      setIsVisible(true);
+    }, 1400 + delay); // 1400ms (top nav animation + page transition) + delay
 
-    return () => clearTimeout(timer)
-  }, [pathname, delay])
+    return () => clearTimeout(timer);
+  }, [pathname, delay]);
 
   return (
     <Box
@@ -36,12 +36,12 @@ export function AnimatedContent({ children, delay = 0 }: AnimatedContentProps) {
     >
       {children}
     </Box>
-  )
+  );
 }
 
 // Auto-wrap common components with staggered delays
 export function StaggeredContent({ children }: { children: React.ReactNode }) {
-  const childrenArray = Array.isArray(children) ? children : [children]
+  const childrenArray = Array.isArray(children) ? children : [children];
   
   return (
     <>
@@ -51,5 +51,5 @@ export function StaggeredContent({ children }: { children: React.ReactNode }) {
         </AnimatedContent>
       ))}
     </>
-  )
+  );
 }

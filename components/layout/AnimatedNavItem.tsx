@@ -1,60 +1,61 @@
-"use client"
+"use client";
 
-import { Box, Link, Icon, Text } from "@chakra-ui/react"
-import NextLink from "next/link"
-import { useState } from "react"
-import { usePathname } from "next/navigation"
-import { useNavigation } from "../context/NavigationContext"
+import { Box, Link, Icon, Text } from "@chakra-ui/react";
+import NextLink from "next/link";
+import type { ElementType} from "react";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useNavigation } from "../context/NavigationContext";
 
 interface AnimatedNavItemProps {
-  href: string
-  icon: any
-  children: React.ReactNode
+  href: string;
+  icon: ElementType;
+  children: React.ReactNode;
 }
 
 export function AnimatedNavItem({ href, icon, children }: AnimatedNavItemProps) {
-  const [isClicked, setIsClicked] = useState(false)
-  const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([])
-  const pathname = usePathname()
-  const isActive = pathname === href || (href === '/blog' && pathname?.startsWith('/blog'))
-  const { setClickPosition } = useNavigation()
+  const [isClicked, setIsClicked] = useState(false);
+  const [ripples, setRipples] = useState<Array<{ id: number; x: number; y: number }>>([]);
+  const pathname = usePathname();
+  const isActive = pathname === href || (href === '/blog' && pathname?.startsWith('/blog'));
+  const { setClickPosition } = useNavigation();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Don't trigger animation if already on this page
     if (isActive) {
-      e.preventDefault()
-      return
+      e.preventDefault();
+      return;
     }
 
-    const rect = e.currentTarget.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     
     // Store the viewport position of the click for the page transition
     setClickPosition({ 
       x: rect.left + rect.width / 2, // Center of the nav item
       y: rect.top + rect.height / 2  // Center of the nav item
-    })
+    });
     
     const newRipple = {
       id: Date.now(),
       x,
       y,
-    }
+    };
     
-    setRipples(prev => [...prev, newRipple])
-    setIsClicked(true)
+    setRipples(prev => [...prev, newRipple]);
+    setIsClicked(true);
     
     // Remove ripple after animation
     setTimeout(() => {
-      setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id))
-    }, 600)
+      setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
+    }, 600);
     
     // Reset click state
     setTimeout(() => {
-      setIsClicked(false)
-    }, 150)
-  }
+      setIsClicked(false);
+    }, 150);
+  };
 
   return (
     <Link
@@ -152,5 +153,5 @@ export function AnimatedNavItem({ href, icon, children }: AnimatedNavItemProps) 
         />
       )}
     </Link>
-  )
+  );
 }

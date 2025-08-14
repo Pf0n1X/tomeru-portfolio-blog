@@ -1,10 +1,12 @@
-"use client"
+"use client";
 
-import { Box, Heading, Text, VStack, Button, HStack, SimpleGrid, Link } from "@chakra-ui/react"
-import { MainLayout } from "@/components/layout/MainLayout"
-import { BlogCard } from "@/components/blog/BlogCard"
-import { AnimatedContent } from "@/components/layout/AnimatedContent"
-import NextLink from "next/link"
+import { Box, Heading, Text, Link, Button } from "@chakra-ui/react";
+import { MainLayout } from "@/components/layout/MainLayout";
+import { BlogCarousel } from "@/components/blog/BlogCarousel";
+import { AnimatedContent } from "@/components/layout/AnimatedContent";
+import { HeroSection } from "./HeroSection";
+import { SkewRevealText } from "@/components/ui/TypewriterText";
+import NextLink from "next/link";
 
 interface BlogPostData {
   id: string
@@ -21,77 +23,66 @@ interface HomePageProps {
 }
 
 export function HomePage({ featuredPosts }: HomePageProps) {
+  // Calculate skew animation duration: 1900ms delay (after nav completes) + (28 chars × 60ms) + 500ms buffer
+  const skewDuration = 1900 + (28 * 60) + 500; // = 4080ms
+
   return (
     <MainLayout>
-      <Box maxW="6xl" mx="auto">
-        {/* Hero Section */}
-        <VStack align="start" gap={8} mb={16}>
-          <AnimatedContent delay={0}>
-            <Box>
-              <Heading 
-                size="4xl" 
-                mb={6} 
-                color="gray.900" 
-                _dark={{ color: "white" }}
-                lineHeight="shorter"
-              >
-                Welcome to Tom's
-                <br />
-                <Text as="span" color="red.600" _dark={{ color: "red.400" }}>
-                  Portfolio & Blog
-                </Text>
-              </Heading>
-              <Text 
-                fontSize="xl" 
-                color="gray.600" 
-                _dark={{ color: "gray.300" }}
-                maxW="2xl"
-                lineHeight="tall"
-              >
-                I'm a software developer passionate about building modern web applications. 
-                Here you'll find my thoughts on web development, programming tutorials, and insights 
-                from my journey in tech.
-              </Text>
-            </Box>
+      {/* Hero Section */}
+      <Box mb={12} display="flex" justifyContent="center">
+        <HeroSection />
+      </Box>
+      
+      {/* Flavor Text Section */}
+      <Box maxW="6xl" mx="auto" px={8} mb={12}>
+        <Box textAlign="center">
+          <SkewRevealText
+            text="Crafting Digital Experiences"
+            delay={1900}
+            speed={60}
+            isHeading={true}
+            size={{ base: "2xl", md: "3xl" }}
+            color={{ base: "gray.900", _dark: "white" }}
+            fontWeight="bold"
+            letterSpacing="tight"
+            mb={6}
+          />
+          <AnimatedContent delay={skewDuration + 200}>
+            <Text 
+              fontSize={{ base: "lg", md: "xl" }}
+              color={{ base: "gray.600", _dark: "gray.400" }}
+              lineHeight="tall"
+              maxW="4xl"
+              mx="auto"
+            >
+              Passionate about building modern, performant web applications 
+              that deliver exceptional user experiences. I focus on clean code, 
+              scalable architecture, and cutting-edge technologies.
+            </Text>
           </AnimatedContent>
-          
-          <AnimatedContent delay={100}>
-            <HStack gap={4}>
-              <Link as={NextLink} href="/blog">
-                <Button colorScheme="red" size="lg" px={8} py={6}>
-                  Read My Blog
-                </Button>
-              </Link>
-              <Link as={NextLink} href="#about">
-                <Button variant="outline" size="lg" px={8} py={6}>
-                  About Me
-                </Button>
-              </Link>
-            </HStack>
-          </AnimatedContent>
-        </VStack>
-        
-        {/* Featured Posts Section */}
-        <AnimatedContent delay={200}>
-          <Box>
-            <Heading size="xl" mb={6} color="gray.900" _dark={{ color: "white" }}>
-              Featured Posts
+        </Box>
+      </Box>
+      
+      {/* Featured Posts Section */}
+      <Box maxW="6xl" mx="auto" px={8} mb={8}>
+        <AnimatedContent delay={skewDuration + 500}>
+          <Box mb={8} textAlign="center">
+            <Heading size="xl" color={{ base: "gray.900", _dark: "white" }}>
+              Latest Posts
             </Heading>
           </Box>
         </AnimatedContent>
         
-        <SimpleGrid columns={{ base: 1, md: 2 }} gap={6} mb={8}>
-          {featuredPosts.map((post, index) => (
-            <AnimatedContent key={post.id} delay={300 + index * 100}>
-              <BlogCard post={post} />
-            </AnimatedContent>
-          ))}
-        </SimpleGrid>
+        <AnimatedContent delay={skewDuration + 700}>
+          <Box mb={8}>
+            <BlogCarousel posts={featuredPosts} />
+          </Box>
+        </AnimatedContent>
         
-        <AnimatedContent delay={300 + featuredPosts.length * 100}>
+        <AnimatedContent delay={skewDuration + 900}>
           <Box textAlign="center">
             <Link as={NextLink} href="/blog">
-              <Button variant="outline" colorScheme="red" px={6} py={4}>
+              <Button variant="outline" colorScheme="red" px={8} py={4}>
                 View All Posts
               </Button>
             </Link>
@@ -99,5 +90,5 @@ export function HomePage({ featuredPosts }: HomePageProps) {
         </AnimatedContent>
       </Box>
     </MainLayout>
-  )
+  );
 }

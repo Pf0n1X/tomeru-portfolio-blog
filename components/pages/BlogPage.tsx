@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { Box, Heading, Text, SimpleGrid } from "@chakra-ui/react"
-import { BlogCard } from "@/components/blog/BlogCard"
-import { MainLayout } from "@/components/layout/MainLayout"
-import { AnimatedContent } from "@/components/layout/AnimatedContent"
+import { Box, Heading, Text, SimpleGrid } from "@chakra-ui/react";
+import { BlogCard } from "@/components/blog/BlogCard";
+import { MainLayout } from "@/components/layout/MainLayout";
+import { AnimatedContent } from "@/components/layout/AnimatedContent";
 
 interface BlogPostData {
   id: string
@@ -43,5 +43,5 @@ export function BlogPage({ posts }: BlogPageProps) {
         </SimpleGrid>
       </Box>
     </MainLayout>
-  )
+  );
 }

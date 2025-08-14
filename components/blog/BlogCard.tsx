@@ -1,5 +1,5 @@
-import { Box, Heading, Text, HStack, Link } from "@chakra-ui/react"
-import NextLink from "next/link"
+import { Box, Heading, Text, HStack, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 export interface BlogPost {
   id: string
@@ -17,15 +17,18 @@ interface BlogCardProps {
 
 export function BlogCard({ post }: BlogCardProps) {
   return (
-    <Link 
-      as={NextLink} 
+    <Link
+      as={NextLink}
       href={`/blog/${post.slug}`}
       textDecoration="none"
       _hover={{ textDecoration: "none" }}
+      _focus={{ outline: "none", boxShadow: "none" }}
       h="full"
       display="flex"
     >
       <Box
+        position="relative"
+        zIndex={1}
         p={6}
         bg="white"
         _dark={{ bg: "gray.900", borderColor: "gray.800" }}
@@ -47,17 +50,17 @@ export function BlogCard({ post }: BlogCardProps) {
         <Heading size="md" mb={3} color="gray.900" _dark={{ color: "white" }}>
           {post.title}
         </Heading>
-        
+
         <Text color="gray.600" _dark={{ color: "gray.300" }} mb={4} lineHeight="tall" flex={1}>
           {post.excerpt}
         </Text>
-        
+
         <HStack justify="space-between" align="center" mb={3}>
           <Text fontSize="sm" color="gray.500" _dark={{ color: "gray.400" }}>
             {post.date} • {post.readTime}
           </Text>
         </HStack>
-        
+
         <HStack gap={2} flexWrap="wrap">
           {post.tags.map((tag) => (
             <Box
@@ -77,5 +80,5 @@ export function BlogCard({ post }: BlogCardProps) {
         </HStack>
       </Box>
     </Link>
-  )
+  );
 }
