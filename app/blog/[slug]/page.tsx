@@ -1,8 +1,8 @@
-import { Box, Heading, Text, HStack, VStack } from "@chakra-ui/react"
-import { MainLayout } from "@/components/layout/MainLayout"
-import { getBlogPostBySlug, formatDate, getAllBlogSlugs } from "@/lib/mdx"
-import { notFound } from "next/navigation"
-import { MDXContent } from "@/components/blog/MDXContent"
+import { Box, Heading, Text, HStack, VStack } from "@chakra-ui/react";
+import { MainLayout } from "@/components/layout/MainLayout";
+import { getBlogPostBySlug, formatDate, getAllBlogSlugs } from "@/lib/mdx";
+import { notFound } from "next/navigation";
+import { MDXContent } from "@/components/blog/MDXContent";
 
 interface BlogPostPageProps {
   params: {
@@ -12,17 +12,17 @@ interface BlogPostPageProps {
 
 // Generate static paths for all blog posts
 export function generateStaticParams() {
-  const slugs = getAllBlogSlugs()
+  const slugs = getAllBlogSlugs();
   return slugs.map((slug) => ({
     slug,
-  }))
+  }));
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getBlogPostBySlug(params.slug)
+  const post = getBlogPostBySlug(params.slug);
 
   if (!post || !post.published) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -70,5 +70,5 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         </VStack>
       </Box>
     </MainLayout>
-  )
+  );
 }

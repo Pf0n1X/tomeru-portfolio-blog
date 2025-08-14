@@ -1,35 +1,35 @@
-"use client"
+"use client";
 
-import { Box } from "@chakra-ui/react"
-import { useEffect, useState } from "react"
-import { usePathname } from "next/navigation"
-import { useNavigation } from "../context/NavigationContext"
+import { Box } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useNavigation } from "../context/NavigationContext";
 
 interface PageTransitionProps {
   children: React.ReactNode
 }
 
 export function PageTransition({ children }: PageTransitionProps) {
-  const [phase, setPhase] = useState<'fadeOut' | 'fadeIn'>('fadeOut')
-  const pathname = usePathname()
-  const { clickPosition, setClickPosition } = useNavigation()
+  const [phase, setPhase] = useState<'fadeOut' | 'fadeIn'>('fadeOut');
+  const pathname = usePathname();
+  const { clickPosition, setClickPosition } = useNavigation();
 
   useEffect(() => {
     // Reset states
-    setPhase('fadeOut')
+    setPhase('fadeOut');
     
     // Clear click position if we have one
     if (clickPosition) {
-      setClickPosition(null)
+      setClickPosition(null);
     }
     
     // Phase 2: Fade in new content after fade out + top navigation animation
     const fadeInTimer = setTimeout(() => {
-      setPhase('fadeIn')
-    }, 1400) // Wait for top navigation animation to complete (1300ms) + small buffer (100ms)
+      setPhase('fadeIn');
+    }, 1400); // Wait for top navigation animation to complete (1300ms) + small buffer (100ms)
 
-    return () => clearTimeout(fadeInTimer)
-  }, [pathname, clickPosition, setClickPosition])
+    return () => clearTimeout(fadeInTimer);
+  }, [pathname, clickPosition, setClickPosition]);
 
   return (
     <Box position="relative" w="full" h="full" overflow="hidden">
@@ -43,5 +43,5 @@ export function PageTransition({ children }: PageTransitionProps) {
         {children}
       </Box>
     </Box>
-  )
+  );
 }

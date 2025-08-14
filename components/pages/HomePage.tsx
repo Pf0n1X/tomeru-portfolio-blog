@@ -1,13 +1,12 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Box, Heading, Text, Link, Button } from "@chakra-ui/react"
-import { MainLayout } from "@/components/layout/MainLayout"
-import { BlogCarousel } from "@/components/blog/BlogCarousel"
-import { AnimatedContent } from "@/components/layout/AnimatedContent"
-import { HeroSection } from "./HeroSection"
-import { SkewRevealText } from "@/components/ui/TypewriterText"
-import NextLink from "next/link"
+import { Box, Heading, Text, Link, Button } from "@chakra-ui/react";
+import { MainLayout } from "@/components/layout/MainLayout";
+import { BlogCarousel } from "@/components/blog/BlogCarousel";
+import { AnimatedContent } from "@/components/layout/AnimatedContent";
+import { HeroSection } from "./HeroSection";
+import { SkewRevealText } from "@/components/ui/TypewriterText";
+import NextLink from "next/link";
 
 interface BlogPostData {
   id: string
@@ -25,7 +24,7 @@ interface HomePageProps {
 
 export function HomePage({ featuredPosts }: HomePageProps) {
   // Calculate skew animation duration: 1900ms delay (after nav completes) + (28 chars × 60ms) + 500ms buffer
-  const skewDuration = 1900 + (28 * 60) + 500 // = 4080ms
+  const skewDuration = 1900 + (28 * 60) + 500; // = 4080ms
 
   return (
     <MainLayout>
@@ -91,5 +90,5 @@ export function HomePage({ featuredPosts }: HomePageProps) {
         </AnimatedContent>
       </Box>
     </MainLayout>
-  )
+  );
 }

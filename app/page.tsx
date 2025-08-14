@@ -1,8 +1,8 @@
-import { getAllBlogPosts, formatDate } from "@/lib/mdx"
-import { HomePage } from "@/components/pages/HomePage"
+import { getAllBlogPosts, formatDate } from "@/lib/mdx";
+import { HomePage } from "@/components/pages/HomePage";
 
 export default async function Home() {
-  const allPosts = getAllBlogPosts()
+  const allPosts = getAllBlogPosts();
   
   // Show all posts in the carousel for better effect
   const featuredPosts = allPosts.map((post) => ({
@@ -13,7 +13,7 @@ export default async function Home() {
     readTime: post.readTime,
     tags: post.tags,
     slug: post.slug,
-  }))
+  }));
 
-  return <HomePage featuredPosts={featuredPosts} />
+  return <HomePage featuredPosts={featuredPosts} />;
 }

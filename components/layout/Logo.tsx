@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { Box, Link } from "@chakra-ui/react"
-import NextLink from "next/link"
-import { useState } from "react"
+import { Box, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { useState } from "react";
 
 export function Logo() {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <Link as={NextLink} href="/" textDecoration="none" width="100%">
@@ -72,5 +72,5 @@ export function Logo() {
         </Box>
       </Box>
     </Link>
-  )
+  );
 }

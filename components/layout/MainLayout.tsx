@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { PageTransition } from "./PageTransition"
+import { PageTransition } from "./PageTransition";
 
 interface MainLayoutProps {
   children: React.ReactNode
@@ -11,5 +11,5 @@ export function MainLayout({ children }: MainLayoutProps) {
     <PageTransition>
       {children}
     </PageTransition>
-  )
+  );
 }

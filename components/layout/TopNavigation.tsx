@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { 
   Box, 
@@ -10,14 +10,14 @@ import {
   IconButton,
   VStack,
   Portal
-} from "@chakra-ui/react"
-import { FiHome, FiFileText, FiMenu, FiX } from "react-icons/fi"
-import NextLink from "next/link"
-import { useState, useEffect } from "react"
-import { usePathname } from "next/navigation"
-import { Logo } from "./Logo"
-import { ColorModeButton } from "@/components/ui/color-mode"
-import { useNavigation } from "../context/NavigationContext"
+} from "@chakra-ui/react";
+import { FiHome, FiFileText, FiMenu, FiX } from "react-icons/fi";
+import NextLink from "next/link";
+import type { ElementType } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { Logo } from "./Logo";
+import { ColorModeButton } from "@/components/ui/color-mode";
 
 // Animation CSS
 const slideDownAnimation = `
@@ -31,7 +31,7 @@ const slideDownAnimation = `
       transform: translateY(0);
     }
   }
-`
+`;
 
 const fadeInUpAnimation = `
   @keyframes fadeInUp {
@@ -44,7 +44,7 @@ const fadeInUpAnimation = `
       transform: translateY(0);
     }
   }
-`
+`;
 
 const scaleInAnimation = `
   @keyframes scaleIn {
@@ -57,28 +57,28 @@ const scaleInAnimation = `
       transform: scale(1);
     }
   }
-`
+`;
 
 interface NavItemProps {
   href: string
-  icon: any
+  icon: ElementType;
   children: React.ReactNode
   isMobile?: boolean
   onClose?: () => void
 }
 
 function NavItem({ href, icon, children, isMobile = false, onClose }: NavItemProps) {
-  const pathname = usePathname()
-  const isActive = pathname === href || (href === '/blog' && pathname?.startsWith('/blog'))
+  const pathname = usePathname();
+  const isActive = pathname === href || (href === '/blog' && pathname?.startsWith('/blog'));
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (isActive) {
-      e.preventDefault()
-      return
+      e.preventDefault();
+      return;
     }
     
-    if (onClose) onClose()
-  }
+    if (onClose) onClose();
+  };
 
   if (isMobile) {
     return (
@@ -120,7 +120,7 @@ function NavItem({ href, icon, children, isMobile = false, onClose }: NavItemPro
           />
         )}
       </Link>
-    )
+    );
   }
 
   return (
@@ -174,43 +174,43 @@ function NavItem({ href, icon, children, isMobile = false, onClose }: NavItemPro
         {children}
       </Text>
     </Link>
-  )
+  );
 }
 
 export function TopNavigation() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [hasMounted, setHasMounted] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Trigger mount animation
   useEffect(() => {
     const timer = setTimeout(() => {
-      setHasMounted(true)
-    }, 100) // Small delay for smoother initial render
-    return () => clearTimeout(timer)
-  }, [])
+      setHasMounted(true);
+    }, 100); // Small delay for smoother initial render
+    return () => clearTimeout(timer);
+  }, []);
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = 'unset';
     }
     
     // Cleanup on unmount
     return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isMobileMenuOpen])
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -414,5 +414,5 @@ export function TopNavigation() {
         </Portal>
       )}
     </>
-  )
+  );
 }

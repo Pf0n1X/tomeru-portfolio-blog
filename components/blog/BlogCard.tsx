@@ -1,8 +1,5 @@
-import { Box, Heading, Text, HStack, Link } from "@chakra-ui/react"
-import NextLink from "next/link"
-
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { Box, Heading, Text, HStack, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 export interface BlogPost {
   id: string
@@ -83,5 +80,5 @@ export function BlogCard({ post }: BlogCardProps) {
         </HStack>
       </Box>
     </Link>
-  )
+  );
 }

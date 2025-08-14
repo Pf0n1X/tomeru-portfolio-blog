@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { 
   Box, 
@@ -11,9 +11,9 @@ import {
   Image,
   Flex,
   Container
-} from "@chakra-ui/react"
-import { AnimatedContent } from "@/components/layout/AnimatedContent"
-import NextLink from "next/link"
+} from "@chakra-ui/react";
+import { AnimatedContent } from "@/components/layout/AnimatedContent";
+import NextLink from "next/link";
 
 export function HeroSection() {
   return (
@@ -181,5 +181,5 @@ export function HeroSection() {
         </Box>
       </Flex>
     </Container>
-  )
+  );
 }

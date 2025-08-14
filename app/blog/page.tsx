@@ -1,8 +1,8 @@
-import { getAllBlogPosts, formatDate } from "@/lib/mdx"
-import { BlogPage } from "@/components/pages/BlogPage"
+import { getAllBlogPosts, formatDate } from "@/lib/mdx";
+import { BlogPage } from "@/components/pages/BlogPage";
 
 export default async function Blog() {
-  const posts = getAllBlogPosts()
+  const posts = getAllBlogPosts();
 
   // Convert MDX posts to BlogCard format
   const blogPosts = posts.map((post) => ({
@@ -13,7 +13,7 @@ export default async function Blog() {
     readTime: post.readTime,
     tags: post.tags,
     slug: post.slug,
-  }))
+  }));
 
-  return <BlogPage posts={blogPosts} />
+  return <BlogPage posts={blogPosts} />;
 }

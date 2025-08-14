@@ -1,7 +1,7 @@
-import { Box, Heading, Text, Code, Link } from "@chakra-ui/react"
-import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { Box, Heading, Text, Code, Link } from "@chakra-ui/react";
+import ReactMarkdown from 'react-markdown';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface MDXContentProps {
   content: string
@@ -88,21 +88,21 @@ export function MDXContent({ content }: MDXContentProps) {
             </Box>
           ),
           code: ({ className, children }) => {
-            const match = /language-(\w+)/.exec(className || '')
-            const language = match ? match[1] : ''
+            const match = /language-(\w+)/.exec(className || '');
+            const language = match ? match[1] : '';
             
             if (language) {
               return (
                 <Box mb={4} rounded="md" overflow="hidden">
                   <SyntaxHighlighter
-                    style={oneDark as any}
+                    style={oneDark}
                     language={language}
                     PreTag="div"
                   >
                     {String(children).replace(/\n$/, '')}
                   </SyntaxHighlighter>
                 </Box>
-              )
+              );
             }
             
             return (
@@ -117,7 +117,7 @@ export function MDXContent({ content }: MDXContentProps) {
               >
                 {children}
               </Code>
-            )
+            );
           },
           blockquote: ({ children }) => (
             <Box
@@ -140,5 +140,5 @@ export function MDXContent({ content }: MDXContentProps) {
         {content}
       </ReactMarkdown>
     </Box>
-  )
+  );
 }

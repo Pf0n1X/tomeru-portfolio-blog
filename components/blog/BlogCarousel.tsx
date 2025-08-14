@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Box, Text } from "@chakra-ui/react"
-import { BlogCard } from "./BlogCard"
-import { useEffect, useState } from "react"
+import { Box, Text } from "@chakra-ui/react";
+import { BlogCard } from "./BlogCard";
+import { useEffect, useState } from "react";
 
 interface BlogPostData {
   id: string
@@ -19,36 +19,36 @@ interface BlogCarouselProps {
 }
 
 export function BlogCarousel({ posts }: BlogCarouselProps) {
-  const [duplicatedPosts, setDuplicatedPosts] = useState<BlogPostData[]>([])
-  const [cardWidth, setCardWidth] = useState(380)
+  const [duplicatedPosts, setDuplicatedPosts] = useState<BlogPostData[]>([]);
+  const [cardWidth, setCardWidth] = useState(380);
 
   useEffect(() => {
     // Duplicate posts to create seamless loop
-    const duplicates = Math.max(3, Math.ceil(8 / posts.length))
-    const allPosts = Array(duplicates).fill(posts).flat()
-    setDuplicatedPosts(allPosts)
-  }, [posts])
+    const duplicates = Math.max(3, Math.ceil(8 / posts.length));
+    const allPosts = Array(duplicates).fill(posts).flat();
+    setDuplicatedPosts(allPosts);
+  }, [posts]);
 
   useEffect(() => {
     // Set card width based on screen size
     const updateCardWidth = () => {
-      setCardWidth(window.innerWidth < 768 ? 320 : 400)
-    }
+      setCardWidth(window.innerWidth < 768 ? 320 : 400);
+    };
     
-    updateCardWidth()
-    window.addEventListener('resize', updateCardWidth)
-    return () => window.removeEventListener('resize', updateCardWidth)
-  }, [])
+    updateCardWidth();
+    window.addEventListener('resize', updateCardWidth);
+    return () => window.removeEventListener('resize', updateCardWidth);
+  }, []);
 
   if (!posts.length) {
     return (
       <Box textAlign="center" py={8}>
         <Text color={{ base: "gray.500", _dark: "gray.400" }}>No posts available</Text>
       </Box>
-    )
+    );
   }
 
-  const totalWidth = posts.length * cardWidth
+  const totalWidth = posts.length * cardWidth;
 
   return (
     <>
@@ -127,5 +127,5 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
         </Box>
       </Box>
     </>
-  )
+  );
 }

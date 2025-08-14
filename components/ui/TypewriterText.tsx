@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Text, Heading, Box, type HeadingProps } from "@chakra-ui/react"
+import type { ComponentProps } from "react";
+import { useState, useEffect } from "react";
+import { Text, Heading, Box, type HeadingProps } from "@chakra-ui/react";
 
 interface SkewRevealTextProps {
-  text: string
-  delay?: number
-  speed?: number
-  isHeading?: boolean
-  size?: HeadingProps['size']
-  color?: string
-  [key: string]: any
+  text: string;
+  delay?: number;
+  speed?: number;
+  isHeading?: boolean;
+  size?: HeadingProps['size'];
+  color?: ComponentProps<typeof Heading>['color'];
 }
 
 export function SkewRevealText({ 
@@ -22,29 +22,29 @@ export function SkewRevealText({
   color,
   ...props 
 }: SkewRevealTextProps) {
-  const [visibleLetters, setVisibleLetters] = useState(0)
+  const [visibleLetters, setVisibleLetters] = useState(0);
 
   useEffect(() => {
     const startTimer = setTimeout(() => {
-      const letters = text.replace(/\s/g, ' ').split('')
-      let currentLetter = 0
+      const letters = text.replace(/\s/g, ' ').split('');
+      let currentLetter = 0;
 
       const revealNext = () => {
         if (currentLetter < letters.length) {
-          setVisibleLetters(currentLetter + 1)
-          currentLetter++
-          setTimeout(revealNext, speed)
+          setVisibleLetters(currentLetter + 1);
+          currentLetter++;
+          setTimeout(revealNext, speed);
         }
-      }
+      };
 
-      revealNext()
-    }, delay)
+      revealNext();
+    }, delay);
 
-    return () => clearTimeout(startTimer)
-  }, [text, delay, speed])
+    return () => clearTimeout(startTimer);
+  }, [text, delay, speed]);
 
-  const Component = isHeading ? Heading : Text
-  const letters = text.split('')
+  const Component = isHeading ? Heading : Text;
+  const letters = text.split('');
 
   return (
     <Component
@@ -70,5 +70,5 @@ export function SkewRevealText({
         </Box>
       ))}
     </Component>
-  )
+  );
 }
