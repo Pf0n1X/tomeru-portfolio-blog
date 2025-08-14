@@ -17,10 +17,10 @@ export function AnimatedContent({ children, delay = 0 }: AnimatedContentProps) {
     // Reset animation
     setIsVisible(false)
     
-    // Start animation after delay + page transition time
+    // Start animation after delay + top navigation animation time
     const timer = setTimeout(() => {
       setIsVisible(true)
-    }, 300 + delay) // 300ms fade out + delay
+    }, 1400 + delay) // 1400ms (top nav animation + page transition) + delay
 
     return () => clearTimeout(timer)
   }, [pathname, delay])

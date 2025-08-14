@@ -38,7 +38,17 @@ export function MDXContent({ content }: MDXContentProps) {
             </Text>
           ),
           a: ({ href, children }) => (
-            <Link href={href} color="red.600" _dark={{ color: "red.400" }} target="_blank" rel="noopener noreferrer">
+            <Link 
+              href={href} 
+              color="red.600" 
+              _dark={{ color: "red.400" }} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              textDecoration="none"
+              _hover={{ textDecoration: "underline" }}
+              _focus={{ outline: "none" }}
+              _active={{ outline: "none" }}
+            >
               {children}
             </Link>
           ),

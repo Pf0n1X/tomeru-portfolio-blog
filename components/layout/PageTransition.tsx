@@ -23,10 +23,10 @@ export function PageTransition({ children }: PageTransitionProps) {
       setClickPosition(null)
     }
     
-    // Phase 2: Fade in new content after fade out
+    // Phase 2: Fade in new content after fade out + top navigation animation
     const fadeInTimer = setTimeout(() => {
       setPhase('fadeIn')
-    }, 300) // Fade out duration
+    }, 1400) // Wait for top navigation animation to complete (1300ms) + small buffer (100ms)
 
     return () => clearTimeout(fadeInTimer)
   }, [pathname, clickPosition, setClickPosition])

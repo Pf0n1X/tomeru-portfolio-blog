@@ -37,7 +37,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             
             <HStack gap={4} mb={4}>
               <Text fontSize="sm" color="gray.500" _dark={{ color: "gray.400" }}>
-                By Tom Erusalimsky
+                By Tomer Erusalimsky
               </Text>
               <Text fontSize="sm" color="gray.500" _dark={{ color: "gray.400" }}>
                 {formatDate(post.date)} • {post.readTime}

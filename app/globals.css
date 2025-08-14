@@ -3,11 +3,25 @@
   --foreground: #171717;
 }
 
+.light {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+}
+
+html {
+  overflow-y: scroll; /* Force scrollbar to always be visible */
 }
 
 html,

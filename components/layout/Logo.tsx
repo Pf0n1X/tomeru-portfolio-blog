@@ -12,12 +12,12 @@ export function Logo() {
       <Box
         fontSize="2xl"
         fontWeight="bold"
+        overflow="visible"
         color="red.400"
         cursor="pointer"
          width="100%"
         position="relative"
         display="inline-block"
-        overflow="hidden"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         transition="color 0.2s ease"
