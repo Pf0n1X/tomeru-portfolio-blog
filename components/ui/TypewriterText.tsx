@@ -2,15 +2,13 @@
 
 import type { ComponentProps } from "react";
 import { useState, useEffect } from "react";
-import { Text, Heading, Box, type HeadingProps } from "@chakra-ui/react";
+import { Text, Heading, Box } from "@chakra-ui/react";
 
-interface SkewRevealTextProps {
+interface SkewRevealTextProps extends ComponentProps<typeof Heading> {
   text: string;
   delay?: number;
   speed?: number;
   isHeading?: boolean;
-  size?: HeadingProps['size'];
-  color?: ComponentProps<typeof Heading>['color'];
 }
 
 export function SkewRevealText({ 

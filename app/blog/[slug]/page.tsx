@@ -3,11 +3,14 @@ import { MainLayout } from "@/components/layout/MainLayout";
 import { getBlogPostBySlug, formatDate, getAllBlogSlugs } from "@/lib/mdx";
 import { notFound } from "next/navigation";
 import { MDXContent } from "@/components/blog/MDXContent";
+import type{ PageProps } from "@/.next/types/app/page";
 
-interface BlogPostPageProps {
-  params: {
-    slug: string
-  }
+interface BlogPostPageParams {
+  slug: string;
+}
+
+interface BlogPostPageProps extends PageProps {
+  params: Promise<BlogPostPageParams>;
 }
 
 // Generate static paths for all blog posts
@@ -19,7 +22,8 @@ export function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = getBlogPostBySlug(params.slug);
+  const { slug } = await params;
+  const post = getBlogPostBySlug(slug);
 
   if (!post || !post.published) {
     notFound();
