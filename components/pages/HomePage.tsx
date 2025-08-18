@@ -7,6 +7,8 @@ import { AnimatedContent } from "@/components/layout/AnimatedContent";
 import { HeroSection } from "./HeroSection";
 import { SkewRevealText } from "@/components/ui/TypewriterText";
 import NextLink from "next/link";
+import Image from "next/image";
+
 
 interface BlogPostData {
   id: string
