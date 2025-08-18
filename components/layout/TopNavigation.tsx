@@ -11,7 +11,7 @@ import {
   VStack,
   Portal
 } from "@chakra-ui/react";
-import { FiHome, FiFileText, FiMenu, FiX } from "react-icons/fi";
+import { FiHome, FiFileText, FiUser, FiMenu, FiX } from "react-icons/fi";
 import NextLink from "next/link";
 import type { ElementType } from "react";
 import { useState, useEffect } from "react";
@@ -284,6 +284,16 @@ export function TopNavigation() {
               transform={hasMounted ? "translateY(0)" : "translateY(20px)"}
               transition="opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
             >
+              <NavItem href="/about" icon={FiUser}>
+                About
+              </NavItem>
+            </Box>
+            <Box
+              animation={hasMounted ? "fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both" : undefined}
+              opacity={hasMounted ? 1 : 0}
+              transform={hasMounted ? "translateY(0)" : "translateY(20px)"}
+              transition="opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
+            >
               <NavItem href="/blog" icon={FiFileText}>
                 Blog
               </NavItem>
@@ -398,6 +408,14 @@ export function TopNavigation() {
                     onClose={() => setIsMobileMenuOpen(false)}
                   >
                     Home
+                  </NavItem>
+                  <NavItem 
+                    href="/about" 
+                    icon={FiUser} 
+                    isMobile 
+                    onClose={() => setIsMobileMenuOpen(false)}
+                  >
+                    About
                   </NavItem>
                   <NavItem 
                     href="/blog" 
