@@ -116,10 +116,6 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
               minW={{ base: "300px", md: "380px" }}
               maxW={{ base: "300px", md: "380px" }}
               mx={{ base: 1, md: 2 }}
-              _hover={{
-                transform: "translateY(-4px)",
-                transition: "transform 0.2s ease"
-              }}
             >
               <BlogCard post={post} />
             </Box>
