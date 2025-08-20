@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { FaGamepad, FaCode, FaBook, FaMusic } from "react-icons/fa";
 import Image from "next/image";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 // Floating bubble data
 const bubbleData = [
@@ -18,32 +19,57 @@ const bubbleData = [
 
 export function AboutPage() {
   const [isHovered, setIsHovered] = useState(false);
+  
+  // Scroll animation hooks for different sections
+  const { ref: avatarRef, isVisible: avatarVisible } = useScrollAnimation({
+    threshold: 0.3,
+    rootMargin: "0px 0px -50px 0px"
+  });
+  
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation({
+    threshold: 0.3,
+    rootMargin: "0px 0px -50px 0px"
+  });
+  
+  const { ref: techStackRef, isVisible: techStackVisible } = useScrollAnimation({
+    threshold: 0.2,
+    rootMargin: "0px 0px -100px 0px"
+  });
+  
+  const { ref: quickFactsRef, isVisible: quickFactsVisible } = useScrollAnimation({
+    threshold: 0.3,
+    rootMargin: "0px 0px -50px 0px"
+  });
+  
+  const { ref: currentlyRef, isVisible: currentlyVisible } = useScrollAnimation({
+    threshold: 0.3,
+    rootMargin: "0px 0px -50px 0px"
+  });
 
   return (
     <MainLayout>
-      <Box maxW="6xl" mx="auto" px={8} py={24} pt={40}>
+      <Box maxW="6xl" mx="auto" px={8} py={24} pt={60}>
         {/* Hero Section with Avatar */}
-        <VStack spacing={12} textAlign="center">
+        <VStack gap={12} textAlign="center">
           {/* Avatar Section */}
-          <AnimatedContent delay={200}>
-            <Box position="relative" mb={8}>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ 
-                  duration: 0.8, 
-                  ease: [0.4, 0, 0.2, 1],
-                  delay: 0.3 
-                }}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
-                style={{ position: "relative", cursor: "pointer" }}
-              >
+          <Box ref={avatarRef} position="relative" mb={8}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={avatarVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+              transition={{ 
+                duration: 0.8, 
+                ease: [0.4, 0, 0.2, 1],
+                delay: 0.2 
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              style={{ position: "relative", cursor: "pointer", width: 'fit-content' }}
+            >
                 <Image 
                   src="/transparent_sprite.png" 
                   alt="Tomer's avatar" 
                   width={400} 
-                  height={400}
+                  height={430}
                   style={{
                     filter: "drop-shadow(20px -20px 0px #f56565)",
                     position: "relative",
@@ -55,12 +81,12 @@ export function AboutPage() {
                   <AnimatePresence>
                     {isHovered && bubbleData.map((bubble, index) => {
                       const IconComponent = bubble.icon;
-                      // Adjusted positions for centered, smaller sprite
+                      // Better arc - further from head and properly centered
                       const bubblePositions = [
-                        { x: -200, y: -280 }, // Gaming - far left, high
-                        { x: -80, y: -320 },  // Software - left center, highest
-                        { x: 80, y: -320 },   // Learning - right center, highest  
-                        { x: 200, y: -280 }   // Music - far right, high
+                        { x: -240, y: -320 }, // Gaming - left, lower part of arc
+                        { x: -110, y: -400 },  // Software - left center, highest (arc peak)
+                        { x: 70, y: -400 },   // Learning - right center, highest (arc peak)  
+                        { x: 200, y: -320 }   // Music - right, lower part of arc
                       ];
                       const position = bubblePositions[index];
                       const finalX = position.x;
@@ -133,10 +159,11 @@ export function AboutPage() {
                               position="relative"
                               cursor="pointer"
                               _hover={{
-                                transform: "scale(1.1)",
-                                boxShadow: "2xl"
+                                shadow: "lg",
+                                transform: "translateY(-1px)",
+                                borderColor: "red.400"
                               }}
-                              transition="all 0.2s ease"
+                              transition="all 0.2s"
                             >
                               <IconComponent 
                                 size={28} 
@@ -182,9 +209,14 @@ export function AboutPage() {
                       );
                     })}
                   </AnimatePresence>
-                </motion.div>
-                
-              {/* Hint Text */}
+            </motion.div>
+            
+            {/* Hint Text */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={avatarVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <Text 
                 textAlign="center" 
                 mt={6}
@@ -194,216 +226,456 @@ export function AboutPage() {
               >
                 Hover over my avatar to see what I'm passionate about! ✨
               </Text>
-            </Box>
-          </AnimatedContent>
+            </motion.div>
+          </Box>
 
           {/* Title and Subtitle */}
-          <AnimatedContent delay={400}>
-            <VStack spacing={4}>
-              <Heading 
-                size="3xl" 
-                color={{ base: "gray.900", _dark: "white" }}
-                fontWeight="bold"
-                letterSpacing="tight"
-              >
-                Hello, I'm Tomer 👋
-              </Heading>
-              <Text 
-                fontSize="xl" 
-                color={{ base: "gray.600", _dark: "gray.400" }}
-                maxW="2xl"
-                lineHeight="tall"
-              >
-                A passionate software developer who loves building modern, 
-                performant web applications with clean, scalable code.
-              </Text>
-            </VStack>
-          </AnimatedContent>
-
-          {/* Skills/Interests Grid */}
-          <AnimatedContent delay={600}>
-            <Box maxW="4xl" w="full">
-              <VStack spacing={8}>
+          <Box ref={titleRef}>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={titleVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              <VStack gap={4}>
                 <Heading 
-                  size="lg" 
+                  size="3xl" 
                   color={{ base: "gray.900", _dark: "white" }}
-                  mb={4}
+                  fontWeight="bold"
+                  letterSpacing="tight"
                 >
-                  What Drives Me
+                  Hello, I'm Tomer 👋
                 </Heading>
-                
-                <Box
-                  display="grid"
-                  gridTemplateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
-                  gap={8}
-                  w="full"
+                <Text 
+                  fontSize="xl" 
+                  color={{ base: "gray.600", _dark: "gray.400" }}
+                  maxW="2xl"
+                  lineHeight="tall"
                 >
-                  {/* Software Development */}
-                  <Box
-                    bg={{ base: "white", _dark: "gray.800" }}
-                    p={8}
-                    borderRadius="xl"
-                    boxShadow="lg"
-                    border="1px solid"
-                    borderColor={{ base: "gray.200", _dark: "gray.700" }}
-                    _hover={{
-                      transform: "translateY(-4px)",
-                      boxShadow: "xl"
-                    }}
-                    transition="all 0.3s ease"
-                  >
-                    <VStack spacing={4} alignItems="flex-start">
-                      <Box
-                        p={3}
-                        borderRadius="lg"
-                        bg="teal.50"
-                        _dark={{ bg: "teal.900" }}
+                  A passionate software developer who loves building modern, 
+                  performant web applications with clean, scalable code.
+                </Text>
+              </VStack>
+            </motion.div>
+          </Box>
+
+          {/* Tech Stack & Journey */}
+          <Box maxW="6xl" w="full">
+            <VStack gap={16}>
+
+              {/* Interactive Tech & Personal Grid - New Layout */}
+              <Box ref={techStackRef} w="full">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={techStackVisible ? { opacity: 1 } : { opacity: 0 }}
+                  transition={{ duration: 0.8, delay: 0.1 }}
+                >
+                  <VStack gap={12}>
+                                        {/* Top Row - Tech Stack (Redesigned) */}
+                    <Box w="full">
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={techStackVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
                       >
-                        <FaCode color="#4ecdc4" size={24} />
-                      </Box>
-                      <Heading size="md" color={{ base: "gray.900", _dark: "white" }}>
-                        Software Development
-                      </Heading>
-                      <Text color={{ base: "gray.600", _dark: "gray.300" }} lineHeight="tall">
-                        Building scalable applications with clean, maintainable code. 
-                        I focus on modern frameworks and best practices.
-                      </Text>
+                        <Box
+                          position="relative"
+                          bg="rgba(248, 250, 252, 0.8)"
+                          _dark={{ bg: "rgba(255, 255, 255, 0.02)" }}
+                          backdropFilter="blur(20px)"
+                          borderRadius="2xl"
+                          p={6}
+                    border="1px solid"
+                          borderColor={{ base: "rgba(0, 0, 0, 0.1)", _dark: "rgba(255, 255, 255, 0.1)" }}
+                          shadow={{ base: "md", _dark: "none" }}
+                        >
+                          <VStack gap={4} align="stretch">
+                            <HStack gap={3} justify="center">
+                              <Box
+                                w={3}
+                                h={3}
+                                bg="red.400"
+                                borderRadius="full"
+                                boxShadow="0 0 10px rgba(245, 101, 101, 0.6)"
+                              />
+                              <Heading size="lg" color={{ base: "gray.900", _dark: "white" }}>
+                                💻 Tech Stack
+                              </Heading>
+                            </HStack>
+                            
+                            <Text 
+                              fontSize="md" 
+                              color={{ base: "gray.600", _dark: "gray.400" }}
+                              textAlign="center"
+                              mb={2}
+                            >
+                              Building with modern technologies for scalable solutions
+                              </Text>
+
+                            {/* Simplified Tech Display */}
+                            <Flex wrap="wrap" gap={2} justify="center" maxW="4xl" mx="auto">
+                              {[
+                                { name: "React", color: "rgba(97, 218, 251, 0.8)" },
+                                { name: "Next.js", color: "rgba(255, 255, 255, 0.8)" },
+                                { name: "TypeScript", color: "rgba(49, 120, 198, 0.8)" },
+                                { name: "Node.js", color: "rgba(104, 160, 99, 0.8)" },
+                                { name: "Python", color: "rgba(255, 212, 59, 0.8)" },
+                                { name: "PostgreSQL", color: "rgba(51, 103, 145, 0.8)" },
+                                { name: "Docker", color: "rgba(32, 139, 218, 0.8)" },
+                                { name: "Git", color: "rgba(240, 81, 51, 0.8)" }
+                              ].map((tech, index) => (
+                                  <motion.div
+                                  key={tech.name}
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={techStackVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                                  transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
+                                  whileHover={{ scale: 1.05, y: -2 }}
+                                  >
+                                    <Box
+                                      px={3}
+                                      py={2}
+                                    bg="rgba(255, 255, 255, 0.05)"
+                                    borderRadius="full"
+                                      border="1px solid"
+                                    borderColor={{ base: "rgba(0, 0, 0, 0.1)", _dark: "rgba(255, 255, 255, 0.1)" }}
+                                      fontSize="sm"
+                                      fontWeight="medium"
+                                    color={{ base: "gray.700", _dark: "gray.300" }}
+                                    cursor="pointer"
+                                    position="relative"
+                                    overflow="hidden"
+                                    _hover={{
+                                      borderColor: tech.color,
+                                      color: { base: "gray.900", _dark: "white" },
+                                      _before: {
+                                        opacity: 1
+                                      }
+                                    }}
+                                    _before={{
+                                      content: '""',
+                                      position: "absolute",
+                                      top: 0,
+                                      left: 0,
+                                      right: 0,
+                                      bottom: 0,
+                                      background: `linear-gradient(135deg, ${tech.color}20 0%, ${tech.color}10 100%)`,
+                                      opacity: 0,
+                                      transition: "opacity 0.3s ease"
+                                    }}
+                                    transition="all 0.2s"
+                                  >
+                                    <Text position="relative" zIndex={1}>
+                                      {tech.name}
+                                    </Text>
+                                    </Box>
+                                  </motion.div>
+                                ))}
+                              </Flex>
                     </VStack>
+                        </Box>
+                      </motion.div>
                   </Box>
 
-                  {/* Continuous Learning */}
-                  <Box
-                    bg={{ base: "white", _dark: "gray.800" }}
-                    p={8}
-                    borderRadius="xl"
-                    boxShadow="lg"
-                    border="1px solid"
-                    borderColor={{ base: "gray.200", _dark: "gray.700" }}
-                    _hover={{
-                      transform: "translateY(-4px)",
-                      boxShadow: "xl"
-                    }}
-                    transition="all 0.3s ease"
-                  >
-                    <VStack spacing={4} alignItems="flex-start">
-                      <Box
-                        p={3}
-                        borderRadius="lg"
-                        bg="blue.50"
-                        _dark={{ bg: "blue.900" }}
+                                        {/* Bottom Row - New Layout: Quick Facts (1/3) + Currently (2/3) */}
+                    <Flex 
+                      direction={{ base: "column", lg: "row" }}
+                      gap={8}
+                      w="full"
+                    >
+                                            {/* Quick Facts - 1/3 width */}
+                      <Box ref={quickFactsRef} flex={{ base: 1, lg: 1 }} maxW={{ lg: "300px" }} h="320px">
+                      <motion.div
+                          initial={{ opacity: 0, y: 50 }}
+                          animate={quickFactsVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                          transition={{ duration: 0.6, delay: 0.1 }}
+                          style={{ height: "100%" }}
                       >
-                        <FaBook color="#45b7d1" size={24} />
-                      </Box>
-                      <Heading size="md" color={{ base: "gray.900", _dark: "white" }}>
-                        Continuous Learning
-                      </Heading>
-                      <Text color={{ base: "gray.600", _dark: "gray.300" }} lineHeight="tall">
-                        Staying up-to-date with the latest tech trends and 
-                        constantly expanding my knowledge and skills.
-                      </Text>
-                    </VStack>
-                  </Box>
+                        <Box
+                          position="relative"
+                          bg="rgba(248, 250, 252, 0.8)"
+                          _dark={{ bg: "rgba(255, 255, 255, 0.02)" }}
+                          backdropFilter="blur(20px)"
+                          borderRadius="2xl"
+                            p={5}
+                    border="1px solid"
+                          borderColor={{ base: "rgba(0, 0, 0, 0.1)", _dark: "rgba(255, 255, 255, 0.1)" }}
+                          shadow={{ base: "md", _dark: "none" }}
+                          h="full"
+                        >
+                            <VStack gap={4} align="stretch" h="full">
+                            <HStack gap={3}>
+                              <Box
+                                w={3}
+                                h={3}
+                                bg="red.400"
+                                borderRadius="full"
+                                boxShadow="0 0 10px rgba(245, 101, 101, 0.6)"
+                              />
+                                <Heading size="md" color={{ base: "gray.900", _dark: "white" }}>
+                                  ✨ Quick Facts
+                              </Heading>
+                            </HStack>
+                            
+                              <VStack gap={2} align="stretch" flex={1}>
+                                {[
+                                  { emoji: "📚", text: "Book worm" },
+                                  { emoji: "🎮", text: "Gamer" },
+                                  { emoji: "🚀", text: "Tech enthusiast" },
+                                  { emoji: "💪", text: "Gym rat" },
+                              ].map((fact, index) => (
+                                <motion.div
+                                  key={index}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    animate={quickFactsVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                                  whileHover={{ x: 8 }}
+                                >
+                                    <HStack gap={2} p={1.5} borderRadius="lg">
+                                      <Text fontSize="sm">{fact.emoji}</Text>
+                                      <Text color={{ base: "gray.600", _dark: "gray.300" }} fontSize="xs">
+                                      {fact.text}
+                                    </Text>
+                                  </HStack>
+                                </motion.div>
+                              ))}
+                            </VStack>
 
-                  {/* Gaming & Creativity */}
-                  <Box
-                    bg={{ base: "white", _dark: "gray.800" }}
-                    p={8}
-                    borderRadius="xl"
-                    boxShadow="lg"
-                    border="1px solid"
-                    borderColor={{ base: "gray.200", _dark: "gray.700" }}
-                    _hover={{
-                      transform: "translateY(-4px)",
-                      boxShadow: "xl"
-                    }}
-                    transition="all 0.3s ease"
-                  >
-                    <VStack spacing={4} alignItems="flex-start">
-                      <Box
-                        p={3}
-                        borderRadius="lg"
-                        bg="red.50"
-                        _dark={{ bg: "red.900" }}
-                      >
-                        <FaGamepad color="#ff6b6b" size={24} />
-                      </Box>
-                      <Heading size="md" color={{ base: "gray.900", _dark: "white" }}>
-                        Gaming & Creativity
-                      </Heading>
-                      <Text color={{ base: "gray.600", _dark: "gray.300" }} lineHeight="tall">
-                        Interactive experiences that inspire creativity and 
-                        push the boundaries of what's possible.
+                              <Box pt={3} borderTop="1px solid" borderColor="rgba(255, 255, 255, 0.1)">
+                              <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={quickFactsVisible ? { opacity: 1 } : { opacity: 0 }}
+                                  transition={{ duration: 0.6, delay: 0.6 }}
+                                >
+                                  <HStack justify="space-around">
+                                    <VStack gap={0}>
+                                      <Text fontSize="lg" fontWeight="bold" color={{ base: "gray.900", _dark: "white" }}>
+                                      10+
+                                    </Text>
+                                    <Text fontSize="xs" color={{ base: "gray.500", _dark: "gray.500" }}>
+                                        Years
+                                    </Text>
+                                  </VStack>
+                                    <VStack gap={0}>
+                                      <Text fontSize="lg" fontWeight="bold" color={{ base: "gray.900", _dark: "white" }}>
+                                      ∞
+                                    </Text>
+                                    <Text fontSize="xs" color={{ base: "gray.500", _dark: "gray.500" }}>
+                                        Ideas
                       </Text>
                     </VStack>
-                  </Box>
+                                </HStack>
+                              </motion.div>
+                            </Box>
+                          </VStack>
+                        </Box>
+                      </motion.div>
+            </Box>
 
-                  {/* Music & Art */}
-                  <Box
-                    bg={{ base: "white", _dark: "gray.800" }}
-                    p={8}
-                    borderRadius="xl"
-                    boxShadow="lg"
-                    border="1px solid"
-                    borderColor={{ base: "gray.200", _dark: "gray.700" }}
-                    _hover={{
-                      transform: "translateY(-4px)",
-                      boxShadow: "xl"
-                    }}
-                    transition="all 0.3s ease"
-                  >
-                    <VStack spacing={4} alignItems="flex-start">
-                      <Box
-                        p={3}
-                        borderRadius="lg"
-                        bg="yellow.50"
-                        _dark={{ bg: "yellow.900" }}
-                      >
-                        <FaMusic color="#f9ca24" size={24} />
+                                                                  {/* Currently Section - 2/3 width */}
+                      <Box ref={currentlyRef} flex={{ base: 1, lg: 2 }} h="320px">
+          <motion.div
+                          initial={{ opacity: 0, y: 50 }}
+            animate={currentlyVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                          transition={{ duration: 0.6, delay: 0.1 }}
+                          style={{ height: "100%" }}
+          >
+            <Box
+              position="relative"
+                            bg="rgba(248, 250, 252, 0.8)"
+                            _dark={{ bg: "rgba(255, 255, 255, 0.02)" }}
+              backdropFilter="blur(20px)"
+                            borderRadius="2xl"
+                            p={5}
+                            border="1px solid"
+                            borderColor={{ base: "rgba(0, 0, 0, 0.1)", _dark: "rgba(255, 255, 255, 0.1)" }}
+                            h="full"
+                          >
+                            <VStack gap={4} align="stretch" h="full">
+                              <HStack gap={3}>
+                                                              <Box
+                                w={3}
+                                h={3}
+                                bg="red.400"
+                                borderRadius="full"
+                                boxShadow="0 0 10px rgba(245, 101, 101, 0.6)"
+                              />
+                                <Heading size="md" color={{ base: "gray.900", _dark: "white" }}>
+                                  Currently Enjoying
+                                </Heading>
+                              </HStack>
+                              
+                              <Flex 
+                                direction={{ base: "column", md: "row" }}
+                                gap={4}
+                                flex={1}
+                                align="stretch"
+                              >
+                                                                                                                                {/* Now Reading */}
+                                <Box flex={1} display="flex" flexDirection="column">
+                                  <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={currentlyVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+                                    transition={{ duration: 0.5, delay: 0.3 }}
+                                    style={{ height: "100%", display: "flex", flexDirection: "column" }}
+                                  >
+                                    <VStack gap={2} align="stretch" h="full">
+                                      <VStack gap={1} align="start">
+                                        <HStack gap={2}>
+                                          <Text fontSize="lg">📚</Text>
+                                          <Text 
+                                            fontSize="sm" 
+                                            fontWeight="semibold"
+                                            color={{ base: "gray.700", _dark: "gray.300" }}
+                                          >
+                                            Reading
+                                          </Text>
+                                        </HStack>
+                                      </VStack>
+                                      
+                                      <Box
+                                        p={4}
+                                        bg="rgba(245, 101, 101, 0.05)"
+                                        borderRadius="xl"
+                                        border="1px solid"
+                                        borderColor="rgba(245, 101, 101, 0.2)"
+                                        flex={1}
+                                        display="flex"
+                                        flexDirection="column"
+                                        justifyContent="space-between"
+                                        minH="140px"
+                                      >
+                                        <VStack gap={2} align="start" justify="space-between" h="full">
+                                          <VStack gap={2} align="start">
+                                            <Text 
+                                              fontSize="md" 
+                                              fontWeight="semibold" 
+                                              color={{ base: "gray.900", _dark: "white" }}
+                                              lineHeight="short"
+                                            >
+                                              "Oathbringer"
+                                            </Text>
+                                            <Text 
+                                              fontSize="sm" 
+                                              color={{ base: "gray.600", _dark: "gray.400" }}
+                                            >
+                                              by Brandon Sanderson
+                                            </Text>
+                                          </VStack>
+                                          <VStack gap={2} align="start" w="full">
+                                            <HStack gap={2} w="full">
+                                              <Box flex={1} h={2} bg="red.400" borderRadius="full" />
+                                              <Box flex={2} h={2} bg="gray.300" _dark={{ bg: "gray.600" }} borderRadius="full" />
+                                            </HStack>
+                                            <Text fontSize="xs" color={{ base: "gray.500", _dark: "gray.500" }}>
+                                              30% complete
+                                            </Text>
+                                          </VStack>
+                                        </VStack>
+                                      </Box>
+                                      
+                                      <Text 
+                                        fontSize="xs" 
+                                        color={{ base: "gray.600", _dark: "gray.400" }}
+                                        fontStyle="italic"
+              textAlign="center"
+                                        pt={1}
+                                      >
+                                        Epic fantasy with incredible world-building! ⚔️
+                                      </Text>
+                                    </VStack>
+                                  </motion.div>
+                                </Box>
+
+                                {/* Now Playing */}
+                                <Box flex={1} display="flex" flexDirection="column">
+                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={currentlyVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+                                    transition={{ duration: 0.5, delay: 0.4 }}
+                                    style={{ height: "100%", display: "flex", flexDirection: "column" }}
+                                  >
+                                                                        <VStack gap={2} align="stretch" h="full">
+                                      <VStack gap={1} align="start">
+                                        <HStack gap={2}>
+                                          <Text fontSize="lg">🎮</Text>
+                                          <Text 
+                                            fontSize="sm" 
+                                            fontWeight="semibold"
+                                            color={{ base: "gray.700", _dark: "gray.300" }}
+                                          >
+                                            Playing
+                                          </Text>
+                                        </HStack>
+                                      </VStack>
+                                      
+                                      <Box
+                                        p={4}
+                                        bg="rgba(245, 101, 101, 0.05)"
+                                        borderRadius="xl"
+                                        border="1px solid"
+                                        borderColor="rgba(245, 101, 101, 0.2)"
+                                        flex={1}
+                                        display="flex"
+                                        flexDirection="column"
+                                        justifyContent="space-between"
+                                        minH="140px"
+                                      >
+                                        <VStack gap={2} align="start" justify="space-between" h="full">
+                                          <VStack gap={2} align="start">
+                                            <Text 
+                                              fontSize="md" 
+                                              fontWeight="semibold" 
+                    color={{ base: "gray.900", _dark: "white" }}
+                                              lineHeight="short"
+                                            >
+                                              Metaphor: ReFantazio
+                                            </Text>
+                                            <Text 
+                                              fontSize="sm" 
+                                              color={{ base: "gray.600", _dark: "gray.400" }}
+                                            >
+                                              Atlus's fantasy JRPG
+                                            </Text>
+                                          </VStack>
+                                          <HStack gap={2} wrap="wrap">
+                                            <Box px={2} py={1} bg="rgba(245, 101, 101, 0.2)" borderRadius="md">
+                                              <Text fontSize="xs" color={{ base: "red.700", _dark: "red.300" }}>
+                                                JRPG
+                                              </Text>
+                                            </Box>
+                                            <Box px={2} py={1} bg="rgba(245, 101, 101, 0.2)" borderRadius="md">
+                                              <Text fontSize="xs" color={{ base: "red.700", _dark: "red.300" }}>
+                                                Fantasy
+                                              </Text>
+                                            </Box>
+                                          </HStack>
+                                        </VStack>
+                                      </Box>
+                                      
+                                      <Text 
+                                        fontSize="xs" 
+                                        color={{ base: "gray.600", _dark: "gray.400" }}
+                                        fontStyle="italic"
+                                        textAlign="center"
+                                        pt={1}
+                                      >
+                                        Magic meets democracy! 🏛️✨
+                                      </Text>
+                                    </VStack>
+                                  </motion.div>
+                                </Box>
+                              </Flex>
+                            </VStack>
+                          </Box>
+                        </motion.div>
                       </Box>
-                      <Heading size="md" color={{ base: "gray.900", _dark: "white" }}>
-                        Music & Art
-                      </Heading>
-                      <Text color={{ base: "gray.600", _dark: "gray.300" }} lineHeight="tall">
-                        Exploring the intersection of technology and art through 
-                        music production and creative coding.
-                      </Text>
-                    </VStack>
-                  </Box>
+                    </Flex>
+                  </VStack>
+                </motion.div>
                 </Box>
               </VStack>
             </Box>
-          </AnimatedContent>
 
-          {/* Call to Action */}
-          <AnimatedContent delay={800}>
-            <Box
-              maxW="3xl"
-              bg={{ base: "gray.50", _dark: "gray.800" }}
-              p={12}
-              borderRadius="2xl"
-              textAlign="center"
-              border="1px solid"
-              borderColor={{ base: "gray.200", _dark: "gray.700" }}
-            >
-              <VStack spacing={6}>
-                <Heading 
-                  size="lg" 
-                  color={{ base: "gray.900", _dark: "white" }}
-                >
-                  Let's Connect & Build Something Amazing
-                </Heading>
-                <Text 
-                  fontSize="lg" 
-                  color={{ base: "gray.600", _dark: "gray.300" }}
-                  lineHeight="tall"
-                >
-                  I'm always excited to connect with fellow developers, creators, 
-                  and anyone passionate about technology. Whether you have a project 
-                  idea, want to collaborate, or just chat about code - let's connect!
-                </Text>
-              </VStack>
-            </Box>
-          </AnimatedContent>
+          
         </VStack>
       </Box>
     </MainLayout>

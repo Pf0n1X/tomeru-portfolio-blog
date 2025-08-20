@@ -30,12 +30,13 @@ export function BlogCard({ post }: BlogCardProps) {
         position="relative"
         zIndex={1}
         p={6}
-        bg="white"
-        _dark={{ bg: "gray.900", borderColor: "gray.800" }}
+        bg="rgba(248, 250, 252, 0.8)"
+        _dark={{ bg: "rgba(255, 255, 255, 0.02)" }}
+        backdropFilter="blur(20px)"
         rounded="lg"
-        shadow="none"
+        shadow={{ base: "md", _dark: "none" }}
         borderWidth="1px"
-        borderColor="gray.300"
+        borderColor={{ base: "rgba(0, 0, 0, 0.1)", _dark: "rgba(255, 255, 255, 0.1)" }}
         _hover={{
           shadow: "lg",
           transform: "translateY(-1px)",

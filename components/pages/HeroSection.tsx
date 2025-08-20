@@ -70,15 +70,16 @@ export function HeroSection() {
                   px={8} 
                   py={6}
                   _hover={{
-                    transform: "translateY(-2px)",
-                    boxShadow: "lg"
+                    shadow: "lg",
+                    transform: "translateY(-1px)",
+                    borderColor: "red.400"
                   }}
                   transition="all 0.2s"
                 >
                   Read My Blog
                 </Button>
               </Link>
-              <Link as={NextLink} href="#about">
+              <Link as={NextLink} href="/about">
                 <Button 
                   variant="outline" 
                   size="lg" 
@@ -87,10 +88,9 @@ export function HeroSection() {
                   borderColor={{ base: "gray.300", _dark: "gray.500" }}
                   color={{ base: "gray.600", _dark: "gray.300" }}
                   _hover={{
-                    borderColor: "red.400",
-                    color: "red.400",
-                    transform: "translateY(-2px)",
-                    boxShadow: "lg"
+                    shadow: "lg",
+                    transform: "translateY(-1px)",
+                    borderColor: "red.400"
                   }}
                   transition="all 0.2s"
                 >
@@ -125,13 +125,15 @@ export function HeroSection() {
                 overflow="hidden"
                 boxShadow="2xl"
                 _hover={{
-                  transform: "scale(1.05) rotate(-1deg)",
+                  shadow: "lg",
+                  transform: "translateY(-1px)",
+                  borderColor: "red.400"
                 }}
-                transition="all 0.3s ease"
+                transition="all 0.2s"
               >
                 <Image
                   src="/profile-photo.jpg"
-                  alt="Tom Erusalimsky - Software Developer"
+                  alt="Tomer Erusalimsky - Software Developer"
                   w={{ base: "280px", md: "350px", lg: "400px" }}
                   h={{ base: "280px", md: "350px", lg: "400px" }}
                   objectFit="cover"

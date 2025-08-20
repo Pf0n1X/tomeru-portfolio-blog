@@ -1,32 +1,25 @@
 "use client";
 
-import { Box, Heading, Text, Link, Button } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { MainLayout } from "@/components/layout/MainLayout";
-import { BlogCarousel } from "@/components/blog/BlogCarousel";
-import { AnimatedContent } from "@/components/layout/AnimatedContent";
 import { HeroSection } from "./HeroSection";
 import { SkewRevealText } from "@/components/ui/TypewriterText";
-import NextLink from "next/link";
-import Image from "next/image";
 
-
-interface BlogPostData {
-  id: string
-  title: string
-  excerpt: string
-  date: string
-  readTime: string
-  tags: string[]
-  slug: string
-}
+import { BlogSection } from "@/components/sections/BlogSection";
+import { ConnectSection } from "@/components/sections/ConnectSection";
+import type { BlogPostMeta } from "@/lib/mdx";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 interface HomePageProps {
-  featuredPosts: BlogPostData[]
+  featuredPosts: BlogPostMeta[]
 }
 
 export function HomePage({ featuredPosts }: HomePageProps) {
-  // Calculate skew animation duration: 1900ms delay (after nav completes) + (28 chars × 60ms) + 500ms buffer
-  const skewDuration = 1900 + (28 * 60) + 500; // = 4080ms
+  const { ref: flavorTextRef, isVisible: flavorTextVisible } = useScrollAnimation({
+    threshold: 0.3,
+    rootMargin: "0px 0px -50px 0px"
+  });
 
   return (
     <MainLayout>
@@ -36,7 +29,7 @@ export function HomePage({ featuredPosts }: HomePageProps) {
       </Box>
       
       {/* Flavor Text Section */}
-      <Box maxW="6xl" mx="auto" px={8} mb={12}>
+      <Box ref={flavorTextRef} maxW="6xl" mx="auto" px={8} mb={12}>
         <Box textAlign="center">
           <SkewRevealText
             text="Crafting Digital Experiences"
@@ -49,7 +42,11 @@ export function HomePage({ featuredPosts }: HomePageProps) {
             letterSpacing="tight"
             mb={6}
           />
-          <AnimatedContent delay={skewDuration + 200}>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={flavorTextVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <Text 
               fontSize={{ base: "lg", md: "xl" }}
               color={{ base: "gray.600", _dark: "gray.400" }}
@@ -61,36 +58,15 @@ export function HomePage({ featuredPosts }: HomePageProps) {
               that deliver exceptional user experiences. I focus on clean code, 
               scalable architecture, and cutting-edge technologies.
             </Text>
-          </AnimatedContent>
+          </motion.div>
         </Box>
       </Box>
       
       {/* Featured Posts Section */}
-      <Box maxW="6xl" mx="auto" px={8} mb={8}>
-        <AnimatedContent delay={skewDuration + 500}>
-          <Box mb={8} textAlign="center">
-            <Heading size="xl" color={{ base: "gray.900", _dark: "white" }}>
-              Latest Posts
-            </Heading>
-          </Box>
-        </AnimatedContent>
-        
-        <AnimatedContent delay={skewDuration + 700}>
-          <Box mb={8}>
-            <BlogCarousel posts={featuredPosts} />
-          </Box>
-        </AnimatedContent>
-        
-        <AnimatedContent delay={skewDuration + 900}>
-          <Box textAlign="center">
-            <Link as={NextLink} href="/blog">
-              <Button variant="outline" colorScheme="red" px={8} py={4}>
-                View All Posts
-              </Button>
-            </Link>
-          </Box>
-        </AnimatedContent>
-      </Box>
+      <BlogSection featuredPosts={featuredPosts} />
+
+      {/* Connect Section */}
+      <ConnectSection />
     </MainLayout>
   );
 }

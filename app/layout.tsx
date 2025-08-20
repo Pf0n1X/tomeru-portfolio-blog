@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
 import { TopNavigation } from "@/components/layout/TopNavigation";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { NavigationProvider } from "@/components/context/NavigationContext";
 import { Box } from "@chakra-ui/react";
 
@@ -27,13 +28,13 @@ export default function RootLayout({
       <body className={poppins.variable}>
         <Provider>
           <NavigationProvider>
-            <Box minH="100vh" w="100vw" bg={{ base: "white", _dark: "gray.900" }} position="relative">
+            <Box minH="100vh" w="100vw" bg={{ base: "white", _dark: "gray.900" }} position="relative" display="flex" flexDirection="column">
               <TopNavigation />
               <Box 
                 pt="80px" // Space for fixed top navigation
                 px={{ base: 4, md: 8 }}
                 pb={8}
-                minH="100vh"
+                flex="1"
                 w="100vw"
                 bg={{ base: "white", _dark: "gray.900" }}
               >
@@ -41,6 +42,7 @@ export default function RootLayout({
                   {children}
                 </Box>
               </Box>
+              <SiteFooter />
             </Box>
           </NavigationProvider>
         </Provider>
