@@ -1,9 +1,9 @@
-import { Box, Heading, Text, HStack, VStack } from "@chakra-ui/react";
-import { MainLayout } from "@/components/layout/MainLayout";
-import { getBlogPostBySlug, formatDate, getAllBlogSlugs } from "@/lib/mdx";
-import { notFound } from "next/navigation";
-import { MDXContent } from "@/components/blog/MDXContent";
-import type{ PageProps } from "@/.next/types/app/page";
+import { Box, Heading, Text, HStack, VStack } from '@chakra-ui/react';
+import { MainLayout } from '@/components/layout/MainLayout';
+import { getBlogPostBySlug, formatDate, getAllBlogSlugs } from '@/lib/mdx';
+import { notFound } from 'next/navigation';
+import { MDXContent } from '@/components/blog/MDXContent';
+import type{ PageProps } from '@/.next/types/app/page';
 
 interface BlogPostPageParams {
   slug: string;
@@ -35,15 +35,15 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <VStack align="start" gap={6}>
           {/* Header */}
           <Box>
-            <Heading size="2xl" mb={4} color="gray.900" _dark={{ color: "white" }}>
+            <Heading size="2xl" mb={4} color="gray.900" _dark={{ color: 'white' }}>
               {post.title}
             </Heading>
             
             <HStack gap={4} mb={4}>
-              <Text fontSize="sm" color="gray.500" _dark={{ color: "gray.400" }}>
+              <Text fontSize="sm" color="gray.500" _dark={{ color: 'gray.400' }}>
                 By Tomer Erusalimsky
               </Text>
-              <Text fontSize="sm" color="gray.500" _dark={{ color: "gray.400" }}>
+              <Text fontSize="sm" color="gray.500" _dark={{ color: 'gray.400' }}>
                 {formatDate(post.date)} • {post.readTime}
               </Text>
             </HStack>
@@ -55,7 +55,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   px={2}
                   py={1}
                   bg="gray.100"
-                  _dark={{ bg: "gray.700", color: "gray.200" }}
+                  _dark={{ bg: 'gray.700', color: 'gray.200' }}
                   color="gray.700"
                   rounded="md"
                   fontSize="sm"

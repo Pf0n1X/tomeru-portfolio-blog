@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Box } from "@chakra-ui/react";
-import { motion, AnimatePresence } from "framer-motion";
-import type { IconType } from "react-icons";
+import { Box } from '@chakra-ui/react';
+import { motion, AnimatePresence } from 'framer-motion';
+import type { IconType } from 'react-icons';
 
 interface BubbleData {
   icon: IconType;
@@ -30,37 +30,37 @@ export function TechBubble({ bubble, position, isVisible }: TechBubbleProps) {
             opacity: 1, 
             scale: 1, 
             x: position.x, 
-            y: position.y 
+            y: position.y, 
           }}
           exit={{ opacity: 0, scale: 0.3 }}
           transition={{
             duration: 0.6,
             delay: bubble.delay,
-            ease: [0.25, 0.46, 0.45, 0.94]
+            ease: [0.25, 0.46, 0.45, 0.94],
           }}
           style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            zIndex: 1
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 1,
           }}
         >
           <motion.div
             animate={{
               y: [0, -8, 0],
-              rotate: [0, 2, -2, 0]
+              rotate: [0, 2, -2, 0],
             }}
             transition={{
               duration: 3,
               repeat: Infinity,
-              ease: "easeInOut",
-              delay: bubble.delay + 0.8
+              ease: 'easeInOut',
+              delay: bubble.delay + 0.8,
             }}
           >
             <Box
               bg="white"
-              _dark={{ bg: "gray.800" }}
+              _dark={{ bg: 'gray.800' }}
               borderRadius="full"
               p={3}
               boxShadow="xl"
@@ -74,9 +74,9 @@ export function TechBubble({ bubble, position, isVisible }: TechBubbleProps) {
               position="relative"
               cursor="pointer"
               _hover={{
-                shadow: "lg",
-                transform: "translateY(-1px)",
-                borderColor: "red.400"
+                shadow: 'lg',
+                transform: 'translateY(-1px)',
+                borderColor: 'red.400',
               }}
               transition="all 0.2s"
             >
@@ -105,15 +105,15 @@ export function TechBubble({ bubble, position, isVisible }: TechBubbleProps) {
                 zIndex={10}
                 _after={{
                   content: '""',
-                  position: "absolute",
-                  top: "-4px",
-                  left: "50%",
-                  transform: "translateX(-50%)",
+                  position: 'absolute',
+                  top: '-4px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
                   width: 0,
                   height: 0,
-                  borderLeft: "4px solid transparent",
-                  borderRight: "4px solid transparent",
-                  borderBottom: "4px solid gray.800"
+                  borderLeft: '4px solid transparent',
+                  borderRight: '4px solid transparent',
+                  borderBottom: '4px solid gray.800',
                 }}
               >
                 {bubble.label}

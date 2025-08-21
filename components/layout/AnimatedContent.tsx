@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Box } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { Box } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 interface AnimatedContentProps {
   children: React.ReactNode
@@ -20,7 +20,7 @@ export function AnimatedContent({ children, delay = 0 }: AnimatedContentProps) {
     // Start animation after delay + top navigation animation time
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 1400 + delay); // 1400ms (top nav animation + page transition) + delay
+    }, 900 + delay); // 900ms (top nav animation + page transition) + delay
 
     return () => clearTimeout(timer);
   }, [pathname, delay]);

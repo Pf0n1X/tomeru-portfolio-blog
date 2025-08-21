@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { Box, Text } from "@chakra-ui/react";
-import { MainLayout } from "@/components/layout/MainLayout";
-import { HeroSection } from "./HeroSection";
-import { SkewRevealText } from "@/components/ui/TypewriterText";
+import { Box, Text } from '@chakra-ui/react';
+import { MainLayout } from '@/components/layout/MainLayout';
+import { HeroSection } from './HeroSection';
+import { SkewRevealText } from '@/components/ui/TypewriterText';
 
-import { BlogSection } from "@/components/sections/BlogSection";
-import { ConnectSection } from "@/components/sections/ConnectSection";
-import type { BlogPostMeta } from "@/lib/mdx";
-import { motion } from "framer-motion";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { BlogSection } from '@/components/sections/BlogSection';
+import { ConnectSection } from '@/components/sections/ConnectSection';
+import type { BlogPostMeta } from '@/lib/mdx';
+import { motion } from 'framer-motion';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 interface HomePageProps {
   featuredPosts: BlogPostMeta[]
@@ -18,7 +18,7 @@ interface HomePageProps {
 export function HomePage({ featuredPosts }: HomePageProps) {
   const { ref: flavorTextRef, isVisible: flavorTextVisible } = useScrollAnimation({
     threshold: 0.3,
-    rootMargin: "0px 0px -50px 0px"
+    rootMargin: '0px 0px -50px 0px',
   });
 
   return (
@@ -36,8 +36,8 @@ export function HomePage({ featuredPosts }: HomePageProps) {
             delay={1900}
             speed={60}
             isHeading={true}
-            size={{ base: "2xl", md: "3xl" }}
-            color={{ base: "gray.900", _dark: "white" }}
+            size={{ base: '2xl', md: '3xl' }}
+            color={{ base: 'gray.900', _dark: 'white' }}
             fontWeight="bold"
             letterSpacing="tight"
             mb={6}
@@ -48,8 +48,8 @@ export function HomePage({ featuredPosts }: HomePageProps) {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <Text 
-              fontSize={{ base: "lg", md: "xl" }}
-              color={{ base: "gray.600", _dark: "gray.400" }}
+              fontSize={{ base: 'lg', md: 'xl' }}
+              color={{ base: 'gray.600', _dark: 'gray.400' }}
               lineHeight="tall"
               maxW="4xl"
               mx="auto"

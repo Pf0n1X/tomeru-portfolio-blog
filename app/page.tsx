@@ -1,5 +1,5 @@
-import { getAllBlogPosts, formatDate, type BlogPostMeta } from "@/lib/mdx";
-import { HomePage } from "@/components/pages/HomePage";
+import { getAllBlogPosts, formatDate, type BlogPostMeta } from '@/lib/mdx';
+import { HomePage } from '@/components/pages/HomePage';
 
 export default async function Home() {
   const allPosts = getAllBlogPosts();

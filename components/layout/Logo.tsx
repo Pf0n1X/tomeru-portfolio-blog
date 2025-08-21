@@ -1,14 +1,22 @@
-"use client";
+'use client';
 
-import { Box, Link } from "@chakra-ui/react";
-import NextLink from "next/link";
-import { useState } from "react";
+import { Box, Link } from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { useState } from 'react';
 
 export function Logo() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link as={NextLink} href="/" textDecoration="none" width="100%">
+    <Link 
+      as={NextLink} 
+      href="/" 
+      textDecoration="none" 
+      width="100%"
+      _focus={{ outline: 'none', boxShadow: 'none' }}
+      _active={{ transform: 'scale(0.98)' }}
+      transition="transform 0.1s ease"
+    >
       <Box
         fontSize="2xl"
         fontWeight="bold"
@@ -29,7 +37,7 @@ export function Logo() {
             as="span"
             opacity={isHovered ? 0 : 1}
             transition="opacity 0.4s ease"
-            transitionDelay={isHovered ? "0s" : "0.6s"}
+            transitionDelay={isHovered ? '0s' : '0.6s'}
           >
             .
           </Box>
@@ -38,10 +46,10 @@ export function Logo() {
             as="span"
             position="absolute"
             left="100%"
-            transform={isHovered ? "translateX(-6px)" : "translateX(-15px)"}
+            transform={isHovered ? 'translateX(-6px)' : 'translateX(-15px)'}
             opacity={isHovered ? 1 : 0}
             transition="all 0.5s ease"
-            transitionDelay={isHovered ? "0.4s" : "0.2s"}
+            transitionDelay={isHovered ? '0.4s' : '0.2s'}
           >
             r
           </Box>
@@ -50,10 +58,10 @@ export function Logo() {
             as="span"
             position="absolute"
             left="100%"
-            transform={isHovered ? "translateX(4px)" : "translateX(-10px)"}
+            transform={isHovered ? 'translateX(4px)' : 'translateX(-10px)'}
             opacity={isHovered ? 1 : 0}
             transition="all 0.5s ease"
-            transitionDelay={isHovered ? "0.6s" : "0s"}
+            transitionDelay={isHovered ? '0.6s' : '0s'}
           >
             u
           </Box>
@@ -62,10 +70,10 @@ export function Logo() {
             as="span"
             position="absolute"
             left="100%"
-            transform={isHovered ? "translateX(20px)" : "translateX(-5px)"}
+            transform={isHovered ? 'translateX(20px)' : 'translateX(-5px)'}
             opacity={isHovered ? 1 : 0}
             transition="all 0.5s ease"
-            transitionDelay={isHovered ? "0.8s" : "0.1s"}
+            transitionDelay={isHovered ? '0.8s' : '0.1s'}
           >
             .
           </Box>

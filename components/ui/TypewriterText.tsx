@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import type { ComponentProps } from "react";
-import { useState, useEffect } from "react";
-import { Text, Heading, Box } from "@chakra-ui/react";
+import type { ComponentProps } from 'react';
+import { useState, useEffect } from 'react';
+import { Text, Heading, Box } from '@chakra-ui/react';
 
 interface SkewRevealTextProps extends ComponentProps<typeof Heading> {
   text: string;
@@ -57,11 +57,11 @@ export function SkewRevealText({
           key={index}
           as="span"
           display="inline-block"
-          transform={index < visibleLetters ? "translateY(0) skewX(0deg)" : "translateY(30px) skewX(-10deg)"}
+          transform={index < visibleLetters ? 'translateY(0) skewX(0deg)' : 'translateY(30px) skewX(-10deg)'}
           opacity={index < visibleLetters ? 1 : 0}
           transition="all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)"
           style={{
-            transitionDelay: `${index * 50}ms`
+            transitionDelay: `${index * 50}ms`,
           }}
         >
           {letter === ' ' ? '\u00A0' : letter}

@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import { Box } from "@chakra-ui/react";
-import { useColorModeValue } from "./color-mode";
-import { useEffect, useState } from "react";
-import { ParallaxContainer } from "./ParallaxContainer";
+import { Box } from '@chakra-ui/react';
+import { useColorModeValue } from './color-mode';
+import { useEffect, useState } from 'react';
+import { ParallaxContainer } from './ParallaxContainer';
 
 function ParallaxBackgroundContent() {
   const [scrollY, setScrollY] = useState(0);
   
   const primaryGradient = useColorModeValue(
-    "linear(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 100%)",
-    "linear(135deg, rgba(30,30,30,0.8) 0%, rgba(20,20,20,0.6) 50%, rgba(10,10,10,0.3) 100%)"
+    'linear(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.1) 100%)',
+    'linear(135deg, rgba(30,30,30,0.8) 0%, rgba(20,20,20,0.6) 50%, rgba(10,10,10,0.3) 100%)',
   );
   
   const accentGradient = useColorModeValue(
-    "linear(45deg, rgba(239,68,68,0.1) 0%, rgba(251,146,60,0.05) 100%)",
-    "linear(45deg, rgba(239,68,68,0.15) 0%, rgba(251,146,60,0.08) 100%)"
+    'linear(45deg, rgba(239,68,68,0.1) 0%, rgba(251,146,60,0.05) 100%)',
+    'linear(45deg, rgba(239,68,68,0.15) 0%, rgba(251,146,60,0.08) 100%)',
   );
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
@@ -117,8 +117,8 @@ function ParallaxBackgroundContent() {
         right={0}
         bottom={0}
         background={useColorModeValue(
-          "radial-gradient(circle at 70% 30%, rgba(255,255,255,0.3) 0%, transparent 50%)",
-          "radial-gradient(circle at 70% 30%, rgba(255,255,255,0.02) 0%, transparent 50%)"
+          'radial-gradient(circle at 70% 30%, rgba(255,255,255,0.3) 0%, transparent 50%)',
+          'radial-gradient(circle at 70% 30%, rgba(255,255,255,0.02) 0%, transparent 50%)',
         )}
         transform={`translateY(${scrollY * 0.05}px)`}
       />
@@ -134,17 +134,17 @@ function FloatingElementsContent() {
   const [scrollY, setScrollY] = useState(0);
   
   const particleColor = useColorModeValue(
-    "rgba(239, 68, 68, 0.3)",
-    "rgba(239, 68, 68, 0.2)"
+    'rgba(239, 68, 68, 0.3)',
+    'rgba(239, 68, 68, 0.2)',
   );
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const background = useColorModeValue("rgba(255,255,255,0.8)", "rgba(255,255,255,0.3)");
+  const background = useColorModeValue('rgba(255,255,255,0.8)', 'rgba(255,255,255,0.3)');
 
   return (
     <Box position="fixed" top={0} left={0} right={0} bottom={0} pointerEvents="none" zIndex={5}>

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Box, Link, Icon, Text } from "@chakra-ui/react";
-import NextLink from "next/link";
-import type { ElementType} from "react";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import { useNavigation } from "../context/NavigationContext";
+import { Box, Link, Icon, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
+import type { ElementType} from 'react';
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { useNavigation } from '../context/NavigationContext';
 
 interface AnimatedNavItemProps {
   href: string;
@@ -21,8 +21,8 @@ export function AnimatedNavItem({ href, icon, children }: AnimatedNavItemProps) 
   const { setClickPosition } = useNavigation();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    // Don't trigger animation if already on this page
-    if (isActive) {
+    // Only prevent navigation if we're exactly on the target page
+    if (pathname === href) {
       e.preventDefault();
       return;
     }
@@ -34,7 +34,7 @@ export function AnimatedNavItem({ href, icon, children }: AnimatedNavItemProps) 
     // Store the viewport position of the click for the page transition
     setClickPosition({ 
       x: rect.left + rect.width / 2, // Center of the nav item
-      y: rect.top + rect.height / 2  // Center of the nav item
+      y: rect.top + rect.height / 2,  // Center of the nav item
     });
     
     const newRipple = {
@@ -70,15 +70,15 @@ export function AnimatedNavItem({ href, icon, children }: AnimatedNavItemProps) 
       w="full"
       position="relative"
       overflow="hidden"
-      color={isActive ? "red.400" : "gray.300"}
-      bg={isActive ? "gray.800" : "transparent"}
+      color={isActive ? 'red.400' : 'gray.300'}
+      bg={isActive ? 'gray.800' : 'transparent'}
       _hover={{
-        bg: isActive ? "gray.800" : "gray.800",
-        color: "white",
-        textDecoration: "none",
-        transform: "translateX(4px)"
+        bg: isActive ? 'gray.800' : 'gray.800',
+        color: 'white',
+        textDecoration: 'none',
+        transform: 'translateX(4px)',
       }}
-      transform={isClicked ? "scale(0.98)" : "scale(1)"}
+      transform={isClicked ? 'scale(0.98)' : 'scale(1)'}
       transition="all 0.2s cubic-bezier(0.4, 0, 0.2, 1)"
       onClick={handleClick}
     >
@@ -122,7 +122,7 @@ export function AnimatedNavItem({ href, icon, children }: AnimatedNavItemProps) 
         position="absolute"
         left={0}
         top={0}
-        w={isActive ? "3px" : "0"}
+        w={isActive ? '3px' : '0'}
         h="100%"
         bg="red.400"
         transition="width 0.3s ease"
@@ -132,12 +132,12 @@ export function AnimatedNavItem({ href, icon, children }: AnimatedNavItemProps) 
       {/* Icon with animation */}
       <Icon 
         as={icon} 
-        transform={isActive ? "scale(1.1)" : "scale(1)"}
+        transform={isActive ? 'scale(1.1)' : 'scale(1)'}
         transition="transform 0.2s ease"
       />
       
       {/* Text */}
-      <Text fontWeight={isActive ? "600" : "400"}>
+      <Text fontWeight={isActive ? '600' : '400'}>
         {children}
       </Text>
       

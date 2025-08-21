@@ -15,9 +15,11 @@ const eslintConfig = [
     rules: {
       "semi": ["warn", "always"],
       "react/no-unescaped-entities": 0,
-      "@typescript-eslint/consistent-type-imports": "error"
-    }
-  }
+      "@typescript-eslint/consistent-type-imports": "error",
+      "quotes": ["error", "single", { "avoidEscape": true }],
+      "comma-dangle": ["error", "always-multiline"],
+    },
+  },
 ];
 
 export default eslintConfig;

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import type { IconButtonProps, SpanProps } from "@chakra-ui/react";
-import { ClientOnly, IconButton, Skeleton, Span } from "@chakra-ui/react";
-import { ThemeProvider, useTheme } from "next-themes";
-import type { ThemeProviderProps } from "next-themes";
-import * as React from "react";
-import { LuMoon, LuSun } from "react-icons/lu";
+import type { IconButtonProps, SpanProps } from '@chakra-ui/react';
+import { ClientOnly, IconButton, Skeleton, Span } from '@chakra-ui/react';
+import { ThemeProvider, useTheme } from 'next-themes';
+import type { ThemeProviderProps } from 'next-themes';
+import * as React from 'react';
+import { LuMoon, LuSun } from 'react-icons/lu';
 
 export type ColorModeProviderProps = ThemeProviderProps;
 
@@ -22,7 +22,7 @@ export function ColorModeProvider(props: ColorModeProviderProps) {
   );
 }
 
-export type ColorMode = "light" | "dark"
+export type ColorMode = 'light' | 'dark'
 
 export interface UseColorModeReturn {
   colorMode: ColorMode
@@ -34,7 +34,7 @@ export function useColorMode(): UseColorModeReturn {
   const { resolvedTheme, setTheme, forcedTheme } = useTheme();
   const colorMode = forcedTheme || resolvedTheme;
   const toggleColorMode = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
   return {
     colorMode: colorMode as ColorMode,
@@ -45,15 +45,15 @@ export function useColorMode(): UseColorModeReturn {
 
 export function useColorModeValue<T>(light: T, dark: T) {
   const { colorMode } = useColorMode();
-  return colorMode === "dark" ? dark : light;
+  return colorMode === 'dark' ? dark : light;
 }
 
 export function ColorModeIcon() {
   const { colorMode } = useColorMode();
-  return colorMode === "dark" ? <LuMoon /> : <LuSun />;
+  return colorMode === 'dark' ? <LuMoon /> : <LuSun />;
 }
 
-type ColorModeButtonProps = Omit<IconButtonProps, "aria-label">;
+type ColorModeButtonProps = Omit<IconButtonProps, 'aria-label'>;
 
 export const ColorModeButton = React.forwardRef<
   HTMLButtonElement,
@@ -68,24 +68,26 @@ export const ColorModeButton = React.forwardRef<
         aria-label="Toggle color mode"
         size="sm"
         ref={ref}
-        color={{ base: "gray.600", _dark: "gray.300" }}
+        color={{ base: 'gray.600', _dark: 'gray.300' }}
         _hover={{
-          color: { base: "gray.900", _dark: "gray.100" },
-          bg: { base: "gray.50", _dark: "transparent" }
+          color: { base: 'gray.900', _dark: 'gray.100' },
+          bg: { base: 'gray.50', _dark: 'whiteAlpha.200' },
         }}
         _focus={{
-          outline: "none",
-          boxShadow: "none",
-          bg: "transparent"
+          outline: 'none',
+          boxShadow: 'none',
+          bg: 'transparent',
         }}
         _active={{
-          bg: "transparent"
+          bg: { base: 'gray.200', _dark: 'whiteAlpha.300' },
+          transform: 'scale(0.95)',
         }}
+        transition="all 0.15s"
         {...props}
         css={{
           _icon: {
-            width: "5",
-            height: "5",
+            width: '5',
+            height: '5',
           },
         }}
       >

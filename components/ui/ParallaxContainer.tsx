@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import type { BoxProps } from "@chakra-ui/react";
-import { Box } from "@chakra-ui/react";
-import { useEffect, useState, useRef } from "react";
+import type { BoxProps } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import { useEffect, useState, useRef } from 'react';
 
 interface ParallaxContainerProps extends BoxProps {
     children: React.ReactNode;
     speed?: number; // 0.1 to 1, lower = slower parallax
-    direction?: "up" | "down";
+    direction?: 'up' | 'down';
     offset?: number;
 }
 
 export function ParallaxContainer({
     children,
     speed = 0.5,
-    direction = "up",
+    direction = 'up',
     offset = 0,
     ...props
 }: ParallaxContainerProps) {
@@ -26,11 +26,11 @@ export function ParallaxContainer({
             setScrollY(window.scrollY);
         };
 
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => window.removeEventListener("scroll", handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const translateY = direction === "up"
+    const translateY = direction === 'up'
         ? -(scrollY * speed) + offset
         : (scrollY * speed) + offset;
 
@@ -69,7 +69,7 @@ export function ScrollReveal({
                     setIsVisible(true);
                 }
             },
-            { threshold }
+            { threshold },
         );
 
         const element = elementRef.current;
