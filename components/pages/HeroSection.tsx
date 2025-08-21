@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { 
   Box, 
@@ -10,47 +10,47 @@ import {
   Link,
   Image,
   Flex,
-  Container
-} from "@chakra-ui/react";
-import { AnimatedContent } from "@/components/layout/AnimatedContent";
-import NextLink from "next/link";
+  Container,
+} from '@chakra-ui/react';
+import { AnimatedContent } from '@/components/layout/AnimatedContent';
+import NextLink from 'next/link';
 
 export function HeroSection() {
   return (
     <Container maxW="6xl" px={8} display="flex" justifyContent="center">
       <Flex 
-        direction={{ base: "column", lg: "row" }} 
+        direction={{ base: 'column', lg: 'row' }} 
         align="center" 
         justify="space-between"
-        gap={{ base: 6, md: 8 }}
+        gap={{ base: 16, md: 8 }}
         py={{ base: 6, md: 8 }}
       >
         {/* Text Content */}
-        <VStack align={{ base: "center", lg: "start" }} gap={6} flex={1}>
+        <VStack align={{ base: 'center', lg: 'start' }} gap={6} flex={1}>
           <AnimatedContent delay={0}>
-            <Box textAlign={{ base: "center", lg: "left" }}>
+            <Box textAlign={{ base: 'center', lg: 'left' }}>
               <Heading 
-                size={{ base: "3xl", md: "4xl" }}
+                size={{ base: '3xl', md: '4xl' }}
                 mb={6} 
-                color={{ base: "gray.900", _dark: "white" }}
+                color={{ base: 'gray.900', _dark: 'white' }}
                 lineHeight="shorter"
               >
-                Hi, I'm{" "}
+                Hi, I'm{' '}
                 <Text as="span" color="red.400">
                   Tom
                 </Text>
               </Heading>
               <Heading 
-                size={{ base: "xl", md: "2xl" }}
+                size={{ base: 'xl', md: '2xl' }}
                 mb={6}
-                color={{ base: "gray.600", _dark: "gray.300" }}
+                color={{ base: 'gray.600', _dark: 'gray.300' }}
                 fontWeight="normal"
               >
                 Software Developer & Tech Enthusiast
               </Heading>
               <Text 
-                fontSize={{ base: "lg", md: "xl" }}
-                color={{ base: "gray.500", _dark: "gray.400" }}
+                fontSize={{ base: 'lg', md: 'xl' }}
+                color={{ base: 'gray.500', _dark: 'gray.400' }}
                 maxW="2xl"
                 lineHeight="tall"
               >
@@ -62,7 +62,7 @@ export function HeroSection() {
           </AnimatedContent>
           
           <AnimatedContent delay={100}>
-            <HStack gap={4} flexWrap="wrap" justify={{ base: "center", lg: "start" }}>
+            <HStack gap={4} flexWrap="wrap" justify={{ base: 'center', lg: 'start' }}>
               <Link as={NextLink} href="/blog">
                 <Button 
                   colorScheme="red" 
@@ -70,11 +70,15 @@ export function HeroSection() {
                   px={8} 
                   py={6}
                   _hover={{
-                    shadow: "lg",
-                    transform: "translateY(-1px)",
-                    borderColor: "red.400"
+                    shadow: 'lg',
+                    transform: 'translateY(-1px)',
+                    borderColor: 'red.400',
                   }}
-                  transition="all 0.2s"
+                  _active={{
+                    transform: 'translateY(0px)',
+                    shadow: 'md',
+                  }}
+                  transition="all 0.15s"
                 >
                   Read My Blog
                 </Button>
@@ -85,14 +89,19 @@ export function HeroSection() {
                   size="lg" 
                   px={8} 
                   py={6}
-                  borderColor={{ base: "gray.300", _dark: "gray.500" }}
-                  color={{ base: "gray.600", _dark: "gray.300" }}
+                  borderColor={{ base: 'gray.300', _dark: 'gray.500' }}
+                  color={{ base: 'gray.600', _dark: 'gray.300' }}
                   _hover={{
-                    shadow: "lg",
-                    transform: "translateY(-1px)",
-                    borderColor: "red.400"
+                    shadow: 'lg',
+                    transform: 'translateY(-1px)',
+                    borderColor: 'red.400',
                   }}
-                  transition="all 0.2s"
+                  _active={{
+                    transform: 'translateY(0px)',
+                    shadow: 'md',
+                    borderColor: 'red.500',
+                  }}
+                  transition="all 0.15s"
                 >
                   About Me
                 </Button>
@@ -102,7 +111,7 @@ export function HeroSection() {
         </VStack>
 
         {/* Profile Photo */}
-        <Box display="flex" justifyContent={{ base: "center", lg: "flex-end" }}>
+        <Box display="flex" justifyContent={{ base: 'center', lg: 'flex-end' }}>
           <AnimatedContent delay={200}>
             <Box position="relative">
               {/* Background decoration */}
@@ -125,17 +134,17 @@ export function HeroSection() {
                 overflow="hidden"
                 boxShadow="2xl"
                 _hover={{
-                  shadow: "lg",
-                  transform: "translateY(-1px)",
-                  borderColor: "red.400"
+                  shadow: 'lg',
+                  transform: 'translateY(-1px)',
+                  borderColor: 'red.400',
                 }}
                 transition="all 0.2s"
               >
                 <Image
                   src="/profile-photo.jpg"
                   alt="Tomer Erusalimsky - Software Developer"
-                  w={{ base: "280px", md: "350px", lg: "400px" }}
-                  h={{ base: "280px", md: "350px", lg: "400px" }}
+                  w={{ base: '280px', md: '350px', lg: '400px' }}
+                  h={{ base: '280px', md: '350px', lg: '400px' }}
                   objectFit="cover"
                   onError={(e) => {
                     // Handle image load error by replacing with fallback
@@ -146,9 +155,9 @@ export function HeroSection() {
                 
                 {/* Fallback content */}
                 <Box
-                  w={{ base: "280px", md: "350px", lg: "400px" }}
-                  h={{ base: "280px", md: "350px", lg: "400px" }}
-                  bg={{ base: "gray.200", _dark: "gray.700" }}
+                  w={{ base: '280px', md: '350px', lg: '400px' }}
+                  h={{ base: '280px', md: '350px', lg: '400px' }}
+                  bg={{ base: 'gray.200', _dark: 'gray.700' }}
                   display="flex"
                   alignItems="center"
                   justifyContent="center"
@@ -159,10 +168,10 @@ export function HeroSection() {
                   zIndex={-1}
                 >
                   <VStack>
-                    <Text color={{ base: "gray.600", _dark: "gray.400" }} fontSize="lg" textAlign="center">
+                    <Text color={{ base: 'gray.600', _dark: 'gray.400' }} fontSize="lg" textAlign="center">
                       Profile Photo
                     </Text>
-                    <Text color={{ base: "gray.500", _dark: "gray.500" }} fontSize="sm" textAlign="center">
+                    <Text color={{ base: 'gray.500', _dark: 'gray.500' }} fontSize="sm" textAlign="center">
                       Add your photo as profile-photo.jpg
                     </Text>
                   </VStack>

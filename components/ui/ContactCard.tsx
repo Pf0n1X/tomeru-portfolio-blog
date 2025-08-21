@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Box, Heading, Text, Link, VStack } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { Box, Heading, Text, Link, VStack } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
 interface ContactCardProps {
   href: string;
@@ -20,7 +20,7 @@ export function ContactCard({
   icon, 
   title, 
   description, 
-  delay = 0 
+  delay = 0, 
 }: ContactCardProps) {
   return (
     <motion.div
@@ -33,30 +33,34 @@ export function ContactCard({
         href={href}
         target={target}
         rel={rel}
-        _hover={{ textDecoration: "none" }}
-        _focus={{ outline: "none", boxShadow: "none" }}
+        position="relative"
+        bg="rgba(248, 250, 252, 0.8)"
+        _dark={{ bg: 'rgba(255, 255, 255, 0.02)' }}
+        backdropFilter="blur(20px)"
+        borderRadius="2xl"
+        p={6}
+        border="1px solid"
+        borderColor={{ base: 'rgba(0, 0, 0, 0.1)', _dark: 'rgba(255, 255, 255, 0.1)' }}
+        shadow={{ base: 'md', _dark: 'none' }}
         h="full"
+        cursor="pointer"
         display="block"
+        textDecoration="none"
+        _hover={{
+          textDecoration: 'none',
+          shadow: 'lg',
+          transform: 'translateY(-1px)',
+          borderColor: 'red.400',
+        }}
+        _active={{
+          transform: 'translateY(0px)',
+          shadow: 'md',
+          borderColor: 'red.500',
+        }}
+        _focus={{ outline: 'none', boxShadow: 'none' }}
+        transition="all 0.15s"
       >
-        <Box
-          position="relative"
-          bg="rgba(248, 250, 252, 0.8)"
-          _dark={{ bg: "rgba(255, 255, 255, 0.02)" }}
-          backdropFilter="blur(20px)"
-          borderRadius="2xl"
-          p={6}
-          border="1px solid"
-          borderColor={{ base: "rgba(0, 0, 0, 0.1)", _dark: "rgba(255, 255, 255, 0.1)" }}
-          shadow={{ base: "md", _dark: "none" }}
-          h="full"
-          cursor="pointer"
-          _hover={{
-            shadow: "lg",
-            transform: "translateY(-1px)",
-            borderColor: "red.400"
-          }}
-          transition="all 0.2s"
-        >
+        <Box>
           <VStack gap={4} textAlign="center">
             <Box
               w={12}
@@ -72,12 +76,12 @@ export function ContactCard({
               <Text fontSize="2xl">{icon}</Text>
             </Box>
             <VStack gap={2}>
-              <Heading size="md" color={{ base: "gray.900", _dark: "white" }}>
+              <Heading size="md" color={{ base: 'gray.900', _dark: 'white' }}>
                 {title}
               </Heading>
               <Text 
                 fontSize="sm" 
-                color={{ base: "gray.600", _dark: "gray.400" }}
+                color={{ base: 'gray.600', _dark: 'gray.400' }}
                 textAlign="center"
               >
                 {description}

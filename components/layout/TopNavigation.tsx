@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { 
   Box, 
@@ -9,30 +9,17 @@ import {
   Text, 
   IconButton,
   VStack,
-  Portal
-} from "@chakra-ui/react";
-import { FiHome, FiFileText, FiUser, FiMenu, FiX } from "react-icons/fi";
-import NextLink from "next/link";
-import type { ElementType } from "react";
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import { Logo } from "./Logo";
-import { ColorModeButton } from "@/components/ui/color-mode";
+  Portal,
+} from '@chakra-ui/react';
+import { FiHome, FiFileText, FiUser, FiMenu, FiX } from 'react-icons/fi';
+import NextLink from 'next/link';
+import type { ElementType } from 'react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { Logo } from './Logo';
+import { ColorModeButton } from '@/components/ui/color-mode';
 
-// Animation CSS
-const slideDownAnimation = `
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-`;
-
+// Animation CSS - removed conflicting keyframes, using only CSS transitions
 const fadeInUpAnimation = `
   @keyframes fadeInUp {
     from {
@@ -72,7 +59,8 @@ function NavItem({ href, icon, children, isMobile = false, onClose }: NavItemPro
   const isActive = pathname === href || (href === '/blog' && pathname?.startsWith('/blog'));
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    if (isActive) {
+    // Only prevent navigation if we're exactly on the target page
+    if (pathname === href) {
       e.preventDefault();
       return;
     }
@@ -93,20 +81,23 @@ function NavItem({ href, icon, children, isMobile = false, onClose }: NavItemPro
         w="full"
         position="relative"
         overflow="hidden"
-        color={isActive ? "red.400" : { base: "gray.600", _dark: "gray.300" }}
-        bg={isActive ? { base: "red.50", _dark: "whiteAlpha.100" } : "transparent"}
+        color={isActive ? 'red.400' : { base: 'gray.600', _dark: 'gray.300' }}
+        bg={isActive ? { base: 'red.50', _dark: 'whiteAlpha.100' } : 'transparent'}
         _hover={{
-          bg: { base: "gray.50", _dark: "whiteAlpha.200" },
-          color: { base: "gray.900", _dark: "white" },
-          textDecoration: "none",
+          bg: { base: 'gray.50', _dark: 'whiteAlpha.200' },
+          color: { base: 'gray.900', _dark: 'white' },
+          textDecoration: 'none',
+        }}
+        _active={{
+          bg: { base: 'gray.200', _dark: 'whiteAlpha.300' },
+          transform: 'scale(0.98)',
         }}
         borderRadius="xl"
-        // transform={isClicked ? "scale(0.98)" : "scale(1)"}
-        // transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+        transition="all 0.15s"
         onClick={handleClick}
       >
         <Icon as={icon} size="lg" />
-        <Text fontSize="lg" fontWeight={isActive ? "600" : "400"}>
+        <Text fontSize="lg" fontWeight={isActive ? '600' : '400'}>
           {children}
         </Text>
         {isActive && (
@@ -133,14 +124,14 @@ function NavItem({ href, icon, children, isMobile = false, onClose }: NavItemPro
       px={3}
       py={2}
       position="relative"
-      color={isActive ? "red.400" : { base: "gray.600", _dark: "gray.300" }}
+      color={isActive ? 'red.400' : { base: 'gray.600', _dark: 'gray.300' }}
       _hover={{
-        textDecoration: "none",
-        color: isActive ? "red.400" : { base: "gray.900", _dark: "gray.100" }
+        textDecoration: 'none',
+        color: isActive ? 'red.400' : { base: 'gray.900', _dark: 'gray.100' },
       }}
       _focus={{
-        outline: "none",
-        boxShadow: "none"
+        outline: 'none',
+        boxShadow: 'none',
       }}
       transition="color 0.2s ease"
       onClick={handleClick}
@@ -166,7 +157,7 @@ function NavItem({ href, icon, children, isMobile = false, onClose }: NavItemPro
       />
       <Text 
         fontWeight="500"
-        color={isActive ? "red.400" : "inherit"}
+        color={isActive ? 'red.400' : 'inherit'}
         position="relative"
         zIndex={1}
         fontSize="sm"
@@ -214,7 +205,7 @@ export function TopNavigation() {
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{ __html: slideDownAnimation + fadeInUpAnimation + scaleInAnimation }} />
+      <style dangerouslySetInnerHTML={{ __html: fadeInUpAnimation + scaleInAnimation }} />
       <Box
         as="nav"
         position="fixed"
@@ -222,9 +213,8 @@ export function TopNavigation() {
         left={0}
         right={0}
         zIndex={1000}
-        animation={hasMounted ? "slideDown 0.8s cubic-bezier(0.4, 0, 0.2, 1)" : undefined}
         opacity={hasMounted ? 1 : 0}
-        transform={hasMounted ? "translateY(0)" : "translateY(-100%)"}
+        transform={hasMounted ? 'translateY(0)' : 'translateY(-100%)'}
         transition="opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
       >
         {/* Gradient fade background - from solid to transparent */}
@@ -233,13 +223,13 @@ export function TopNavigation() {
           inset={0}
           background={
             isScrolled 
-              ? "linear-gradient(180deg, rgba(23, 25, 35, 0.95) 0%, transparent 100%)"
-              : "linear-gradient(180deg, rgba(23, 25, 35, 0.85) 0%, transparent 100%)"
+              ? 'linear-gradient(180deg, rgba(23, 25, 35, 0.95) 0%, transparent 100%)'
+              : 'linear-gradient(180deg, rgba(23, 25, 35, 0.85) 0%, transparent 100%)'
           }
           _light={{
             background: isScrolled 
-              ? "linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, transparent 100%)"
-              : "linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, transparent 100%)"
+              ? 'linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, transparent 100%)'
+              : 'linear-gradient(180deg, rgba(255, 255, 255, 0.85) 0%, transparent 100%)',
           }}
           backdropFilter="blur(20px)"
           mask="linear-gradient(black, transparent)"
@@ -258,20 +248,20 @@ export function TopNavigation() {
         >
           {/* Logo */}
           <Box
-            animation={hasMounted ? "scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both" : undefined}
+            animation={hasMounted ? 'scaleIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both' : undefined}
             opacity={hasMounted ? 1 : 0}
-            transform={hasMounted ? "scale(1)" : "scale(0.9)"}
+            transform={hasMounted ? 'scale(1)' : 'scale(0.9)'}
             transition="opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
           >
             <Logo />
           </Box>
           
           {/* Desktop Navigation */}
-          <HStack gap={6} display={{ base: "none", md: "flex" }}>
+          <HStack gap={6} display={{ base: 'none', md: 'flex' }}>
             <Box
-              animation={hasMounted ? "fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both" : undefined}
+              animation={hasMounted ? 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both' : undefined}
               opacity={hasMounted ? 1 : 0}
-              transform={hasMounted ? "translateY(0)" : "translateY(20px)"}
+              transform={hasMounted ? 'translateY(0)' : 'translateY(20px)'}
               transition="opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
             >
               <NavItem href="/" icon={FiHome}>
@@ -279,9 +269,9 @@ export function TopNavigation() {
               </NavItem>
             </Box>
             <Box
-              animation={hasMounted ? "fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both" : undefined}
+              animation={hasMounted ? 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.5s both' : undefined}
               opacity={hasMounted ? 1 : 0}
-              transform={hasMounted ? "translateY(0)" : "translateY(20px)"}
+              transform={hasMounted ? 'translateY(0)' : 'translateY(20px)'}
               transition="opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
             >
               <NavItem href="/about" icon={FiUser}>
@@ -289,9 +279,9 @@ export function TopNavigation() {
               </NavItem>
             </Box>
             <Box
-              animation={hasMounted ? "fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both" : undefined}
+              animation={hasMounted ? 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both' : undefined}
               opacity={hasMounted ? 1 : 0}
-              transform={hasMounted ? "translateY(0)" : "translateY(20px)"}
+              transform={hasMounted ? 'translateY(0)' : 'translateY(20px)'}
               transition="opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
             >
               <NavItem href="/blog" icon={FiFileText}>
@@ -303,9 +293,9 @@ export function TopNavigation() {
           {/* Right side controls */}
           <HStack gap={4}>
             <Box
-              animation={hasMounted ? "fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both" : undefined}
+              animation={hasMounted ? 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both' : undefined}
               opacity={hasMounted ? 1 : 0}
-              transform={hasMounted ? "translateY(0)" : "translateY(20px)"}
+              transform={hasMounted ? 'translateY(0)' : 'translateY(20px)'}
               transition="opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
             >
               <ColorModeButton />
@@ -313,22 +303,27 @@ export function TopNavigation() {
             
             {/* Mobile menu button */}
             <Box
-              animation={hasMounted ? "fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both" : undefined}
+              animation={hasMounted ? 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.7s both' : undefined}
               opacity={hasMounted ? 1 : 0}
-              transform={hasMounted ? "translateY(0)" : "translateY(20px)"}
+              transform={hasMounted ? 'translateY(0)' : 'translateY(20px)'}
               transition="opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)"
             >
               <IconButton
                 aria-label="Open menu"
                 variant="ghost"
                 size="sm"
-                display={{ base: "flex", md: "none" }}
+                display={{ base: 'flex', md: 'none' }}
                 onClick={() => setIsMobileMenuOpen(true)}
-                color={{ base: "gray.600", _dark: "gray.300" }}
+                color={{ base: 'gray.600', _dark: 'gray.300' }}
                 _hover={{
-                  bg: { base: "gray.100", _dark: "whiteAlpha.200" },
-                  color: { base: "gray.900", _dark: "white" }
+                  bg: { base: 'gray.100', _dark: 'whiteAlpha.200' },
+                  color: { base: 'gray.900', _dark: 'white' },
                 }}
+                _active={{
+                  bg: { base: 'gray.200', _dark: 'whiteAlpha.300' },
+                  transform: 'scale(0.95)',
+                }}
+                transition="all 0.15s"
               >
                 <FiMenu />
               </IconButton>
@@ -346,16 +341,16 @@ export function TopNavigation() {
             zIndex={2000}
             bg="blackAlpha.800"
             backdropFilter="blur(10px)"
-            display={{ base: "flex", md: "none" }}
+            display={{ base: 'flex', md: 'none' }}
             alignItems="center"
             justifyContent="center"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             <Box
-              bg={{ base: "white", _dark: "gray.900" }}
+              bg={{ base: 'white', _dark: 'gray.900' }}
               borderRadius="2xl"
               border="1px"
-              borderColor={{ base: "gray.200", _dark: "gray.700" }}
+              borderColor={{ base: 'gray.200', _dark: 'gray.700' }}
               p={8}
               mx={4}
               maxW="sm"
@@ -373,11 +368,16 @@ export function TopNavigation() {
                 top={4}
                 right={4}
                 onClick={() => setIsMobileMenuOpen(false)}
-                color={{ base: "gray.600", _dark: "gray.300" }}
+                color={{ base: 'gray.600', _dark: 'gray.300' }}
                 _hover={{
-                  bg: { base: "gray.100", _dark: "whiteAlpha.200" },
-                  color: { base: "gray.900", _dark: "white" }
+                  bg: { base: 'gray.100', _dark: 'whiteAlpha.200' },
+                  color: { base: 'gray.900', _dark: 'white' },
                 }}
+                _active={{
+                  bg: { base: 'gray.200', _dark: 'whiteAlpha.300' },
+                  transform: 'scale(0.95)',
+                }}
+                transition="all 0.15s"
               >
                 <FiX />
               </IconButton>
@@ -393,7 +393,7 @@ export function TopNavigation() {
                   <Text
                     fontSize="xs"
                     fontWeight="semibold"
-                    color={{ base: "gray.500", _dark: "gray.400" }}
+                    color={{ base: 'gray.500', _dark: 'gray.400' }}
                     textTransform="uppercase"
                     letterSpacing="wide"
                     textAlign="center"

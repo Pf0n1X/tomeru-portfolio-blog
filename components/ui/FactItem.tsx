@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { HStack, Text } from "@chakra-ui/react";
-import { motion } from "framer-motion";
+import { HStack, Text } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 
 interface FactItemProps {
   emoji: string;
@@ -19,7 +19,7 @@ export function FactItem({ emoji, text, delay = 0 }: FactItemProps) {
     >
       <HStack gap={3} p={2} borderRadius="lg">
         <Text fontSize="md">{emoji}</Text>
-        <Text color={{ base: "gray.600", _dark: "gray.300" }} fontSize="sm">
+        <Text color={{ base: 'gray.600', _dark: 'gray.300' }} fontSize="sm">
           {text}
         </Text>
       </HStack>

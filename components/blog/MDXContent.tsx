@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Code, Link } from "@chakra-ui/react";
+import { Box, Heading, Text, Code, Link } from '@chakra-ui/react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -8,6 +8,8 @@ interface MDXContentProps {
 }
 
 export function MDXContent({ content }: MDXContentProps) {
+  let isFirstH1 = true;
+  
   return (
     <Box
       css={{
@@ -17,23 +19,30 @@ export function MDXContent({ content }: MDXContentProps) {
     >
       <ReactMarkdown
         components={{
-          h1: ({ children }) => (
-            <Heading as="h1" size="xl" mt={8} mb={4} color="gray.900" _dark={{ color: "white" }}>
-              {children}
-            </Heading>
-          ),
+          h1: ({ children }) => {
+            // Skip the first H1 since it's already displayed in the page header
+            if (isFirstH1) {
+              isFirstH1 = false;
+              return null;
+            }
+            return (
+              <Heading as="h1" size="xl" mt={8} mb={4} color="gray.900" _dark={{ color: 'white' }}>
+                {children}
+              </Heading>
+            );
+          },
           h2: ({ children }) => (
-            <Heading as="h2" size="lg" mt={6} mb={3} color="gray.900" _dark={{ color: "white" }}>
+            <Heading as="h2" size="lg" mt={6} mb={3} color="gray.900" _dark={{ color: 'white' }}>
               {children}
             </Heading>
           ),
           h3: ({ children }) => (
-            <Heading as="h3" size="md" mt={6} mb={3} color="gray.900" _dark={{ color: "white" }}>
+            <Heading as="h3" size="md" mt={6} mb={3} color="gray.900" _dark={{ color: 'white' }}>
               {children}
             </Heading>
           ),
           p: ({ children }) => (
-            <Text mb={4} lineHeight="tall" color="gray.700" _dark={{ color: "gray.300" }}>
+            <Text mb={4} lineHeight="tall" color="gray.700" _dark={{ color: 'gray.300' }}>
               {children}
             </Text>
           ),
@@ -41,13 +50,13 @@ export function MDXContent({ content }: MDXContentProps) {
             <Link 
               href={href} 
               color="red.600" 
-              _dark={{ color: "red.400" }} 
+              _dark={{ color: 'red.400' }} 
               target="_blank" 
               rel="noopener noreferrer"
-              textDecoration="none"
-              _hover={{ textDecoration: "underline" }}
-              _focus={{ outline: "none" }}
-              _active={{ outline: "none" }}
+              textDecoration="underline"
+              _hover={{ textDecoration: 'none' }}
+              _focus={{ outline: 'none' }}
+              _active={{ outline: 'none' }}
             >
               {children}
             </Link>
@@ -57,11 +66,11 @@ export function MDXContent({ content }: MDXContentProps) {
               as="ul"
               mb={4}
               color="gray.700"
-              _dark={{ color: "gray.300" }}
+              _dark={{ color: 'gray.300' }}
               pl={6}
               css={{
                 listStyleType: 'disc',
-                listStylePosition: 'outside'
+                listStylePosition: 'outside',
               }}
             >
               {children}
@@ -72,11 +81,11 @@ export function MDXContent({ content }: MDXContentProps) {
               as="ol"
               mb={4}
               color="gray.700"
-              _dark={{ color: "gray.300" }}
+              _dark={{ color: 'gray.300' }}
               pl={6}
               css={{
                 listStyleType: 'decimal',
-                listStylePosition: 'outside'
+                listStylePosition: 'outside',
               }}
             >
               {children}
@@ -110,7 +119,7 @@ export function MDXContent({ content }: MDXContentProps) {
                 px={2}
                 py={1}
                 bg="gray.100"
-                _dark={{ bg: "gray.800", color: "red.400" }}
+                _dark={{ bg: 'gray.800', color: 'red.400' }}
                 color="red.600"
                 rounded="md"
                 fontSize="sm"
@@ -125,12 +134,12 @@ export function MDXContent({ content }: MDXContentProps) {
               borderLeft="4px"
               borderColor="red.400"
               bg="gray.50"
-              _dark={{ bg: "gray.800" }}
+              _dark={{ bg: 'gray.800' }}
               p={4}
               mb={4}
               rounded="md"
             >
-              <Text fontStyle="italic" color="gray.600" _dark={{ color: "gray.400" }}>
+              <Text fontStyle="italic" color="gray.600" _dark={{ color: 'gray.400' }}>
                 {children}
               </Text>
             </Box>

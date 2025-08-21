@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Box, Text } from "@chakra-ui/react";
-import { BlogCard } from "./BlogCard";
-import { useEffect, useState } from "react";
+import { Box, Text } from '@chakra-ui/react';
+import { BlogCard } from './BlogCard';
+import { useEffect, useState } from 'react';
 
 interface BlogPostData {
   id: string
@@ -43,7 +43,7 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
   if (!posts.length) {
     return (
       <Box textAlign="center" py={8}>
-        <Text color={{ base: "gray.500", _dark: "gray.400" }}>No posts available</Text>
+        <Text color={{ base: 'gray.500', _dark: 'gray.400' }}>No posts available</Text>
       </Box>
     );
   }
@@ -79,31 +79,31 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
         py={4}
         _before={{
           content: '""',
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           left: 0,
-          width: { base: "50px", md: "100px" },
-          height: "100%",
+          width: { base: '50px', md: '100px' },
+          height: '100%',
           bgGradient: { 
-            base: "linear(to-r, white, transparent)", 
-            _dark: "linear(to-r, gray.900, transparent)" 
+            base: 'linear(to-r, white, transparent)', 
+            _dark: 'linear(to-r, gray.900, transparent)', 
           },
           zIndex: 2,
-          pointerEvents: "none"
+          pointerEvents: 'none',
         }}
         _after={{
           content: '""',
-          position: "absolute",
+          position: 'absolute',
           top: 0,
           right: 0,
-          width: { base: "50px", md: "100px" },
-          height: "100%",
+          width: { base: '50px', md: '100px' },
+          height: '100%',
           bgGradient: { 
-            base: "linear(to-l, white, transparent)", 
-            _dark: "linear(to-l, gray.900, transparent)" 
+            base: 'linear(to-l, white, transparent)', 
+            _dark: 'linear(to-l, gray.900, transparent)', 
           },
           zIndex: 2,
-          pointerEvents: "none"
+          pointerEvents: 'none',
         }}
       >
         <Box
@@ -113,8 +113,8 @@ export function BlogCarousel({ posts }: BlogCarouselProps) {
           {duplicatedPosts.map((post, index) => (
             <Box
               key={`${post.id}-${index}`}
-              minW={{ base: "300px", md: "380px" }}
-              maxW={{ base: "300px", md: "380px" }}
+              minW={{ base: '300px', md: '380px' }}
+              maxW={{ base: '300px', md: '380px' }}
               mx={{ base: 1, md: 2 }}
             >
               <BlogCard post={post} />

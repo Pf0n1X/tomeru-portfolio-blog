@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { Box, Text, Link, HStack } from "@chakra-ui/react";
-import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
+import { Box, Text, Link, HStack } from '@chakra-ui/react';
+import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
 
 export function SiteFooter() {
   const currentYear = new Date().getFullYear();
@@ -9,9 +9,9 @@ export function SiteFooter() {
   return (
     <Box
       as="footer"
-      bg={{ base: "gray.50", _dark: "gray.800" }}
+      bg={{ base: 'gray.50', _dark: 'gray.800' }}
       borderTop="1px solid"
-      borderColor={{ base: "gray.200", _dark: "gray.700" }}
+      borderColor={{ base: 'gray.200', _dark: 'gray.700' }}
       mt="auto"
       py={8}
     >
@@ -22,8 +22,8 @@ export function SiteFooter() {
               href="https://www.linkedin.com/in/tomer-erusalimsky-b2540619a"
               target="_blank"
               rel="noopener noreferrer"
-              color={{ base: "gray.600", _dark: "gray.400" }}
-              _hover={{ color: "red.400" }}
+              color={{ base: 'gray.600', _dark: 'gray.400' }}
+              _hover={{ color: 'red.400' }}
               fontSize="xl"
             >
               <FaLinkedin />
@@ -32,16 +32,16 @@ export function SiteFooter() {
               href="https://github.com/TomerPF"
               target="_blank"
               rel="noopener noreferrer"
-              color={{ base: "gray.600", _dark: "gray.400" }}
-              _hover={{ color: "red.400" }}
+              color={{ base: 'gray.600', _dark: 'gray.400' }}
+              _hover={{ color: 'red.400' }}
               fontSize="xl"
             >
               <FaGithub />
             </Link>
             <Link
               href="mailto:tom.eru@gmail.com"
-              color={{ base: "gray.600", _dark: "gray.400" }}
-              _hover={{ color: "red.400" }}
+              color={{ base: 'gray.600', _dark: 'gray.400' }}
+              _hover={{ color: 'red.400' }}
               fontSize="xl"
             >
               <FaEnvelope />
@@ -50,10 +50,10 @@ export function SiteFooter() {
         </Box>
         
         <Box textAlign="center">
-          <Text fontSize="sm" color={{ base: "gray.600", _dark: "gray.400" }} mb={2}>
+          <Text fontSize="sm" color={{ base: 'gray.600', _dark: 'gray.400' }} mb={2}>
             © {currentYear} Tomer Erusalimsky. All rights reserved.
           </Text>
-          <Text fontSize="xs" color={{ base: "gray.500", _dark: "gray.500" }}>
+          <Text fontSize="xs" color={{ base: 'gray.500', _dark: 'gray.500' }}>
             Built with Next.js & Chakra UI
           </Text>
         </Box>

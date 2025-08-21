@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { Box, Heading, Text, Flex } from "@chakra-ui/react";
-import { motion } from "framer-motion";
-import { ContactCard } from "@/components/ui/ContactCard";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Box, Heading, Text, Flex } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import { ContactCard } from '@/components/ui/ContactCard';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export function ConnectSection() {
   const { ref, isVisible } = useScrollAnimation({
     threshold: 0.2,
-    rootMargin: "0px 0px -100px 0px"
+    rootMargin: '0px 0px -100px 0px',
   });
 
   return (
@@ -19,20 +19,20 @@ export function ConnectSection() {
         transition={{ 
           duration: 0.8, 
           delay: 0,
-          ease: "easeOut"
+          ease: 'easeOut',
         }}
       >
         <Box textAlign="center" mb={12}>
           <Heading 
             size="2xl" 
             mb={4}
-            color={{ base: "gray.900", _dark: "white" }}
+            color={{ base: 'gray.900', _dark: 'white' }}
           >
             Let&apos;s Connect! 🚀
           </Heading>
           <Text 
             fontSize="lg" 
-            color={{ base: "gray.600", _dark: "gray.400" }}
+            color={{ base: 'gray.600', _dark: 'gray.400' }}
             maxW="2xl" 
             mx="auto"
           >
@@ -43,7 +43,7 @@ export function ConnectSection() {
 
         {/* Connect Cards Grid */}
         <Flex 
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: 'column', md: 'row' }}
           gap={6}
           w="full"
           align="stretch"
@@ -86,12 +86,12 @@ export function ConnectSection() {
           <Box textAlign="center" mt={12}>
             <Text 
               fontSize="md" 
-              color={{ base: "gray.700", _dark: "gray.300" }}
+              color={{ base: 'gray.700', _dark: 'gray.300' }}
               fontStyle="italic"
             >
               &quot;If you don&apos;t like what&apos;s being said, change the conversation.&quot; 
-              <Text as="span" color={{ base: "red.500", _dark: "red.400" }}>
-                {" "}- Don Draper
+              <Text as="span" color={{ base: 'red.500', _dark: 'red.400' }}>
+                {' '}- Don Draper
               </Text>
             </Text>
           </Box>
